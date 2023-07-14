@@ -59,7 +59,7 @@ const setup = ({
 
 test('renders registration form', () => {
   const { getByText, getByTestId, getByRole } = setup();
-  expect(getByText(/Signup/i)).toBeInTheDocument();
+  expect(getByText(/Create your account/i)).toBeInTheDocument();
   expect(getByRole('textbox', { name: /Full name/i })).toBeInTheDocument();
   expect(getByRole('form', { name: /Registration form/i })).toBeVisible();
   expect(getByRole('textbox', { name: /Username/i })).toBeInTheDocument();

@@ -109,7 +109,7 @@ Keep up with the latest updates by visiting the releases page - [Releases](https
   * [Code Standards and Conventions](docs/contributions/coding_conventions.md)
   * [Testing](docs/contributions/testing.md)
   * [Security](SECURITY.md)
-  * [Trello Board](https://trello.com/b/17z094kq/AnirudhGPTe)
+  * [Trello Board](https://trello.com/b/17z094kq/AnirudhGPT)
 </details>
 
 
