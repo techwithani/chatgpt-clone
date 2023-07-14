@@ -10,7 +10,7 @@ const {
   sendMessage,
   createOnProgress,
   formatSteps,
-  formatAction
+  formatAction,
 } = require('./handlers');
 const requireJwtAuth = require('../../../middleware/requireJwtAuth');
 
@@ -74,12 +74,12 @@ router.post('/', requireJwtAuth, verifiedRateLimiter, async (req, res) => {
       temperature: req.body?.temperature ?? 0,
       top_p: req.body?.top_p ?? 1,
       presence_penalty: req.body?.presence_penalty ?? 0,
-      frequency_penalty: req.body?.frequency_penalty ?? 0
+      frequency_penalty: req.body?.frequency_penalty ?? 0,
     },
     agentOptions: {
       ...agentOptions,
       // agent: 'functions'
-    }
+    },
   };
 
   console.log('ask log');
@@ -94,7 +94,7 @@ router.post('/', requireJwtAuth, verifiedRateLimiter, async (req, res) => {
     conversationId,
     parentMessageId,
     req,
-    res
+    res,
   });
 });
 
@@ -104,7 +104,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache, no-transform',
     'Access-Control-Allow-Origin': '*',
-    'X-Accel-Buffering': 'no'
+    'X-Accel-Buffering': 'no',
   });
   let userMessage;
   let userMessageId;
@@ -119,7 +119,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
     loading: true,
     inputs: [],
     latest: null,
-    outputs: null
+    outputs: null,
   };
 
   try {
@@ -151,10 +151,10 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
             model: endpointOption.modelOptions.model,
             unfinished: true,
             cancelled: false,
-            error: false
+            error: false,
           });
         }
-      }
+      },
     });
 
     const abortController = new AbortController();
@@ -181,7 +181,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
         final: true,
         conversation: await getConvo(req.user.id, conversationId),
         requestMessage: userMessage,
-        responseMessage: responseMessage
+        responseMessage: responseMessage,
       };
     };
 
@@ -196,7 +196,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
       endpoint,
       reverseProxyUrl: process.env.OPENAI_REVERSE_PROXY || null,
       proxy: process.env.PROXY || null,
-      ...endpointOption
+      ...endpointOption,
     };
 
     let openAIApiKey = req.body?.token != '' ? req.body?.token : process.env.OPENAI_API_KEY;
@@ -243,9 +243,9 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
         res,
         text,
         plugin,
-        parentMessageId: overrideParentMessageId || userMessageId
+        parentMessageId: overrideParentMessageId || userMessageId,
       }),
-      abortController
+      abortController,
     });
 
     if (overrideParentMessageId) {
@@ -266,7 +266,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
       final: true,
       conversation: await getConvo(req.user.id, conversationId),
       requestMessage: userMessage,
-      responseMessage: response
+      responseMessage: response,
     });
     res.end();
 
@@ -279,7 +279,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
       });
       await saveConvo(req.user.id, {
         conversationId: conversationId,
-        title
+        title,
       });
     }
   } catch (error) {
@@ -294,7 +294,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
       unfinished: false,
       cancelled: false,
       error: true,
-      text: error.message
+      text: error.message,
     };
     await saveMessage(errorMessage);
     handleError(res, errorMessage);
