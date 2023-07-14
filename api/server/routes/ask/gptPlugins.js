@@ -1,7 +1,7 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const router = express.Router();
-const { Logtail } = require("@logtail/node");
+const { Logtail } = require('@logtail/node');
 const { titleConvo, validateTools, PluginsClient } = require('../../../app');
 const { abortMessage, getAzureCredentials } = require('../../../utils');
 const { saveMessage, getConvoTitle, saveConvo, getConvo } = require('../../../models');
@@ -17,7 +17,9 @@ const requireJwtAuth = require('../../../middleware/requireJwtAuth');
 const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour
   max: 100,
-  handler: function(req) { req.socket.end();}
+  handler: function (req) {
+    req.socket.end();
+  },
 });
 var logtail;
 try {
@@ -27,8 +29,8 @@ try {
     log: () => {},
     info: () => {},
     error: () => {},
-    flush: () => {}
-  }
+    flush: () => {},
+  };
 }
 
 const abortControllers = new Map();
@@ -98,7 +100,15 @@ router.post('/', requireJwtAuth, verifiedRateLimiter, async (req, res) => {
   });
 });
 
-const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, conversationId, req, res }) => {
+const ask = async ({
+  text,
+  endpoint,
+  endpointOption,
+  parentMessageId = null,
+  conversationId,
+  req,
+  res,
+}) => {
   res.writeHead(200, {
     Connection: 'keep-alive',
     'Content-Type': 'text/event-stream',
@@ -132,7 +142,11 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
       }
     };
 
-    const { onProgress: progressCallback, sendIntermediateMessage, getPartialText } = createOnProgress({
+    const {
+      onProgress: progressCallback,
+      sendIntermediateMessage,
+      getPartialText,
+    } = createOnProgress({
       onProgress: ({ text: partialText }) => {
         const currentTimestamp = Date.now();
 
@@ -188,7 +202,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
     const onStart = (userMessage) => {
       sendMessage(res, { message: userMessage, created: true });
       abortControllers.set(userMessage.conversationId, { abortController, ...endpointOption });
-    }
+    };
 
     endpointOption.tools = await validateTools(user, endpointOption.tools);
     const clientOptions = {
@@ -199,7 +213,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
       ...endpointOption,
     };
 
-    let openAIApiKey = req.body?.token != '' ? req.body?.token : process.env.OPENAI_API_KEY;
+    let openAIApiKey = req.body?.token ? req.body?.token : process.env.OPENAI_API_KEY;
     if (process.env.PLUGINS_USE_AZURE) {
       clientOptions.azure = getAzureCredentials();
       openAIApiKey = clientOptions.azure.azureOpenAIApiKey;
