@@ -213,7 +213,7 @@ const ask = async ({
       ...endpointOption,
     };
 
-    let openAIApiKey = req.body?.token ? req.body?.token : process.env.OPENAI_API_KEY;
+    let openAIApiKey = req.body?.token ?? process.env.OPENAI_API_KEY;
     if (process.env.PLUGINS_USE_AZURE) {
       clientOptions.azure = getAzureCredentials();
       openAIApiKey = clientOptions.azure.azureOpenAIApiKey;
