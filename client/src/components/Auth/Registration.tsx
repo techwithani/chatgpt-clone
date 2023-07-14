@@ -9,7 +9,7 @@ import {
   TRegisterUser,
   useGetStartupConfig,
 } from '@librechat/data-provider';
-import { GoogleIcon, OpenIDIcon, GithubIcon, DiscordIcon } from '~/components'
+import { GoogleIcon, OpenIDIcon, GithubIcon, DiscordIcon } from '~/components';
 
 function Registration() {
   const navigate = useNavigate();
@@ -55,7 +55,9 @@ function Registration() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white pt-6 sm:pt-0">
       <div className="mt-6 w-96 overflow-hidden bg-white px-6 py-4 sm:max-w-md sm:rounded-lg">
-        <h1 className="mb-4 text-center text-3xl font-semibold">Create your account | {startupConfig?.appTitle || 'AnirudhGPT UI'}</h1>
+        <h1 className="mb-4 text-center text-3xl font-semibold">
+          Create your account | {startupConfig?.appTitle || 'AnirudhGPT UI'}
+        </h1>
         {error && (
           <div
             className="relative mt-4 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
@@ -89,12 +91,12 @@ function Registration() {
                   },
                 })}
                 aria-invalid={!!errors.name}
-                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-green-500 focus:outline-none focus:ring-0"
+                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-0"
                 placeholder=" "
               ></input>
               <label
                 htmlFor="name"
-                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-green-500"
+                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-500"
               >
                 {localize(lang, 'com_auth_full_name')}
               </label>
@@ -125,13 +127,13 @@ function Registration() {
                   },
                 })}
                 aria-invalid={!!errors.username}
-                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-green-500 focus:outline-none focus:ring-0"
+                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-0"
                 placeholder=" "
                 autoComplete="off"
               ></input>
               <label
                 htmlFor="username"
-                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-green-500"
+                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-500"
               >
                 {localize(lang, 'com_auth_username')}
               </label>
@@ -167,12 +169,12 @@ function Registration() {
                   },
                 })}
                 aria-invalid={!!errors.email}
-                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-green-500 focus:outline-none focus:ring-0"
+                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-0"
                 placeholder=" "
               ></input>
               <label
                 htmlFor="email"
-                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-green-500"
+                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-500"
               >
                 {localize(lang, 'com_auth_email')}
               </label>
@@ -204,12 +206,12 @@ function Registration() {
                   },
                 })}
                 aria-invalid={!!errors.password}
-                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-green-500 focus:outline-none focus:ring-0"
+                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-0"
                 placeholder=" "
               ></input>
               <label
                 htmlFor="password"
-                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-green-500"
+                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-500"
               >
                 {localize(lang, 'com_auth_password')}
               </label>
@@ -235,15 +237,16 @@ function Registration() {
                 //   return false;
                 // }}
                 {...register('confirm_password', {
-                  validate: (value) => value === password || localize(lang, 'com_auth_password_not_match'),
+                  validate: (value) =>
+                    value === password || localize(lang, 'com_auth_password_not_match'),
                 })}
                 aria-invalid={!!errors.confirm_password}
-                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-green-500 focus:outline-none focus:ring-0"
+                className="peer block w-full appearance-none rounded-t-md border-0 border-b-2 border-gray-300 bg-gray-50 px-2.5 pb-2.5 pt-5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-0"
                 placeholder=" "
               ></input>
               <label
                 htmlFor="confirm_password"
-                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-green-500"
+                className="absolute left-2.5 top-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-500"
               >
                 {localize(lang, 'com_auth_password_confirm')}
               </label>
@@ -267,7 +270,7 @@ function Registration() {
               }
               type="submit"
               aria-label="Submit registration"
-              className="w-full transform rounded-sm bg-green-500 px-4 py-3 tracking-wide text-white transition-colors duration-200 hover:bg-green-600 focus:bg-green-600 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-green-500"
+              className="w-full transform rounded-sm bg-blue-500 px-4 py-3 tracking-wide text-white transition-colors duration-200 hover:bg-blue-600 focus:bg-blue-600 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-blue-500"
             >
               {localize(lang, 'com_auth_continue')}
             </button>
@@ -279,7 +282,7 @@ function Registration() {
           <a
             href="/login"
             aria-label="Login"
-            className="p-1 font-medium text-green-500 hover:underline"
+            className="p-1 font-medium text-blue-500 hover:underline"
           >
             {localize(lang, 'com_auth_login')}
           </a>
@@ -294,12 +297,12 @@ function Registration() {
         )}
         {startupConfig?.googleLoginEnabled && startupConfig?.socialLoginEnabled && (
           <>
-
             <div className="mt-2 flex gap-x-2">
               <a
                 aria-label="Login with Google"
                 className="justify-left flex w-full items-center space-x-3 rounded-md border border-gray-300 px-5 py-3 hover:bg-gray-50 focus:ring-2 focus:ring-violet-600 focus:ring-offset-1"
-                href={`${startupConfig.serverDomain}/oauth/google`}>
+                href={`${startupConfig.serverDomain}/oauth/google`}
+              >
                 <GoogleIcon />
                 <p>{localize(lang, 'com_auth_google_login')}</p>
               </a>
@@ -326,13 +329,12 @@ function Registration() {
         )}
         {startupConfig?.githubLoginEnabled && startupConfig?.socialLoginEnabled && (
           <>
-
             <div className="mt-2 flex gap-x-2">
               <a
                 aria-label="Login with GitHub"
-
                 className="justify-left flex w-full items-center space-x-3 rounded-md border border-gray-300 px-5 py-3 hover:bg-gray-50 focus:ring-2 focus:ring-violet-600 focus:ring-offset-1"
-                href={`${startupConfig.serverDomain}/oauth/github`}>
+                href={`${startupConfig.serverDomain}/oauth/github`}
+              >
                 <GithubIcon />
                 <p>{localize(lang, 'com_auth_github_login')}</p>
               </a>
@@ -341,12 +343,12 @@ function Registration() {
         )}
         {startupConfig?.discordLoginEnabled && startupConfig?.socialLoginEnabled && (
           <>
-
             <div className="mt-2 flex gap-x-2">
               <a
                 aria-label="Login with Discord"
                 className="justify-left flex w-full items-center space-x-3 rounded-md border border-gray-300 px-5 py-3 hover:bg-gray-50 focus:ring-2 focus:ring-violet-600 focus:ring-offset-1"
-                href={`${startupConfig.serverDomain}/oauth/discord`}>
+                href={`${startupConfig.serverDomain}/oauth/discord`}
+              >
                 <DiscordIcon />
                 <p>{localize(lang, 'com_auth_discord_login')}</p>
               </a>
