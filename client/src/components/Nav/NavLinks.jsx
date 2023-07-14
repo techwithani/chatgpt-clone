@@ -12,9 +12,9 @@ import ClearConvos from './ClearConvos';
 import Logout from './Logout';
 import { useAuthContext } from '~/hooks/AuthContext';
 import { cn } from '~/utils/';
-import DotsIcon from '../svg/DotsIcon';
 
 import store from '~/store';
+import { DotsIcon } from '~/components';
 
 export default function NavLinks({ clearSearch, isSearchEnabled }) {
   const [showExports, setShowExports] = useState(false);

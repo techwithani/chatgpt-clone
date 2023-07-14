@@ -1,5 +1,7 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const router = express.Router();
+const { Logtail } = require("@logtail/node");
 const { titleConvo, validateTools, PluginsClient } = require('../../../app');
 const { abortMessage, getAzureCredentials } = require('../../../utils');
 const { saveMessage, getConvoTitle, saveConvo, getConvo } = require('../../../models');
@@ -12,14 +14,42 @@ const {
 } = require('./handlers');
 const requireJwtAuth = require('../../../middleware/requireJwtAuth');
 
+const limiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 100,
+  handler: function(req) { req.socket.end();}
+});
+var logtail;
+try {
+  logtail = new Logtail(process.env.LOGTAIL_TOKEN);
+} catch {
+  logtail = {
+    log: () => {},
+    info: () => {},
+    error: () => {},
+    flush: () => {}
+  }
+}
+
 const abortControllers = new Map();
 
 router.post('/abort', requireJwtAuth, async (req, res) => {
   return await abortMessage(req, res, abortControllers);
 });
 
-router.post('/', requireJwtAuth, async (req, res) => {
+function verifiedRateLimiter(req, res, next) {
+  const isPremium = req.user.emailVerified;
+
+  if (isPremium) {
+    return next();
+  } else {
+    limiter(req, res, next);
+  }
+}
+
+router.post('/', requireJwtAuth, verifiedRateLimiter, async (req, res) => {
   const { endpoint, text, parentMessageId, conversationId } = req.body;
+  const ip = req.headers['x-forwarded-for'];
   if (text.length === 0) return handleError(res, { text: 'Prompt empty or too short' });
   if (endpoint !== 'gptPlugins') return handleError(res, { text: 'Illegal request' });
 
@@ -53,6 +83,7 @@ router.post('/', requireJwtAuth, async (req, res) => {
   };
 
   console.log('ask log');
+  logtail.log(req.user.name + ': ' + text, ip);
   console.dir({ text, conversationId, endpointOption }, { depth: null });
 
   // eslint-disable-next-line no-use-before-define
@@ -82,6 +113,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
   const newConvo = !conversationId;
   const { overrideParentMessageId = null } = req.body;
   const user = req.user.id;
+  const ip = req.headers['x-forwarded-for'];
 
   const plugin = {
     loading: true,
@@ -167,7 +199,7 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
       ...endpointOption,
     };
 
-    let openAIApiKey = req.body?.token ?? process.env.OPENAI_API_KEY;
+    let openAIApiKey = req.body?.token != '' ? req.body?.token : process.env.OPENAI_API_KEY;
     if (process.env.PLUGINS_USE_AZURE) {
       clientOptions.azure = getAzureCredentials();
       openAIApiKey = clientOptions.azure.azureOpenAIApiKey;
@@ -220,8 +252,12 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
       response.parentMessageId = overrideParentMessageId;
     }
 
-    console.log('CLIENT RESPONSE');
-    console.dir(response, { depth: null });
+    // console.log('CLIENT RESPONSE');
+    // console.dir(response, { depth: null });
+    console.log(`AI responds to ${req.user.name}: `, response.text);
+    logtail.log(`AI responds to ${req.user.name}: ` + response.text, ip);
+    logtail.flush();
+
     response.plugin = { ...plugin, loading: false };
     await saveMessage(response);
 
@@ -248,6 +284,8 @@ const ask = async ({ text, endpoint, endpointOption, parentMessageId = null, con
     }
   } catch (error) {
     console.error(error);
+    logtail.error(error);
+    logtail.flush();
     const errorMessage = {
       messageId: responseMessageId,
       sender: 'ChatGPT',

@@ -40,8 +40,8 @@ function Login() {
           <p className="my-4 text-center text-sm font-light text-gray-700">
             {' '}
             {localize(lang, 'com_auth_no_account')}{' '}
-            <a href="/register" className="p-1 text-green-500 hover:underline">
-              {localize(lang, 'com_auth_sign_up')}
+            <a href="/register" className="p-1 text-blue-500 hover:underline">
+              {localize(lang, 'com_auth_sign_up')} | {startupConfig?.appTitle || 'AnirudhGPT UI'}
             </a>
           </p>
         )}
