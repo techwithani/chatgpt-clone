@@ -1,5 +1,7 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const router = express.Router();
+const { Logtail } = require("@logtail/node");
 const { titleConvo, OpenAIClient } = require('../../../app');
 const { getAzureCredentials, abortMessage } = require('../../../utils');
 const { saveMessage, getConvoTitle, saveConvo, getConvo } = require('../../../models');
@@ -10,14 +12,42 @@ const {
 } = require('./handlers');
 const requireJwtAuth = require('../../../middleware/requireJwtAuth');
 
+const limiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 100,
+  handler: function(req) { req.socket.end();}
+});
+var logtail;
+try {
+  logtail = new Logtail(process.env.LOGTAIL_TOKEN);
+} catch {
+  logtail = {
+    log: () => {},
+    info: () => {},
+    error: () => {},
+    flush: () => {}
+  }
+}
+
 const abortControllers = new Map();
 
 router.post('/abort', requireJwtAuth, async (req, res) => {
   return await abortMessage(req, res, abortControllers);
 });
 
-router.post('/', requireJwtAuth, async (req, res) => {
+function verifiedRateLimiter(req, res, next) {
+  const isPremium = req.user.emailVerified;
+
+  if (isPremium) {
+    return next();
+  } else {
+    limiter(req, res, next);
+  }
+}
+
+router.post('/', requireJwtAuth, verifiedRateLimiter, async (req, res) => {
   const { endpoint, text, parentMessageId, conversationId } = req.body;
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   if (text.length === 0) return handleError(res, { text: 'Prompt empty or too short' });
   const isOpenAI = endpoint === 'openAI' || endpoint === 'azureOpenAI';
   if (!isOpenAI) return handleError(res, { text: 'Illegal request' });
@@ -35,8 +65,8 @@ router.post('/', requireJwtAuth, async (req, res) => {
     }
   };
 
-  console.log('ask log');
-  console.dir({ text, conversationId, endpointOption }, { depth: null });
+  console.log(req.user.name + ': ' + text);
+  logtail.log(req.user.name + ': ' + text, ip);
 
   // eslint-disable-next-line no-use-before-define
   return await ask({
@@ -65,6 +95,7 @@ const ask = async ({ text, endpointOption, parentMessageId = null, endpoint, con
   const newConvo = !conversationId;
   const { overrideParentMessageId = null } = req.body;
   const user = req.user.id;
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
   const getIds = (data) => {
     userMessage = data.userMessage;
@@ -138,7 +169,7 @@ const ask = async ({ text, endpointOption, parentMessageId = null, endpoint, con
       ...endpointOption
     };
 
-    let openAIApiKey = req.body?.token ?? process.env.OPENAI_API_KEY;
+    let openAIApiKey = req.body?.token != '' ? req.body?.token : process.env.OPENAI_API_KEY;
 
     if (process.env.AZURE_API_KEY && endpoint === 'azureOpenAI') {
       clientOptions.azure = JSON.parse(req.body?.token) ?? getAzureCredentials();
@@ -167,6 +198,10 @@ const ask = async ({ text, endpointOption, parentMessageId = null, endpoint, con
     }
 
     console.log('promptTokens, completionTokens:', response.promptTokens, response.completionTokens);
+    console.log(`AI responds to ${req.user.name}: `, response.text);
+    logtail.log(`AI responds to ${req.user.name}: ` + response.text, ip);
+
+    logtail.flush();
     await saveMessage(response);
 
     sendMessage(res, {

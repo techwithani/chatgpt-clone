@@ -14,7 +14,7 @@ import { useAuthContext } from '~/hooks/AuthContext';
 import { cn } from '~/utils/';
 
 import store from '~/store';
-import { LinkIcon, DotsIcon } from '~/components';
+import { DotsIcon } from '~/components';
 
 export default function NavLinks({ clearSearch, isSearchEnabled }) {
   const [showExports, setShowExports] = useState(false);
@@ -94,14 +94,6 @@ export default function NavLinks({ clearSearch, isSearchEnabled }) {
                     svg={() => <TrashIcon />}
                     text="Clear conversations"
                     clickHandler={() => setShowClearConvos(true)}
-                  />
-                </Menu.Item>
-                <Menu.Item as="div">
-                  <NavLink
-                    className="flex w-full cursor-pointer items-center gap-3 px-3 py-3 text-sm text-white transition-colors duration-200 hover:bg-gray-700 rounded-none"
-                    svg={() => <LinkIcon />}
-                    text="Help & FAQ"
-                    clickHandler={() => window.open('https://docs.librechat.ai/', '_blank')}
                   />
                 </Menu.Item>
                 <Menu.Item as="div">

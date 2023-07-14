@@ -34,7 +34,7 @@ const titleConvo = async ({ text, response, openAIApiKey, azure = false }) => {
       frequency_penalty: 0
     };
 
-    let apiKey = openAIApiKey ?? process.env.OPENAI_API_KEY;
+    let apiKey = openAIApiKey != '' ? openAIApiKey : process.env.OPENAI_API_KEY;
 
     console.log('title api key', apiKey);
 

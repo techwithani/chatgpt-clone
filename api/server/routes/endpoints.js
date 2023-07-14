@@ -56,9 +56,9 @@ router.get('/', async function (req, res) {
       : false;
   const openAIApiKey = process.env.OPENAI_API_KEY;
   const azureOpenAIApiKey = process.env.AZURE_API_KEY;
-  const userProvidedOpenAI = openAIApiKey ? openAIApiKey === 'user_provided' : azureOpenAIApiKey === 'user_provided';
+  const userProvidedOpenAI = openAIApiKey ? true : azureOpenAIApiKey === 'user_provided';
   const openAI = openAIApiKey
-    ? { availableModels: getOpenAIModels(), userProvide: openAIApiKey === 'user_provided' }
+    ? { availableModels: getOpenAIModels(), userProvide: true }
     : false;
   const azureOpenAI = azureOpenAIApiKey
     ? { availableModels: getOpenAIModels({ azure: true }), userProvide: azureOpenAIApiKey === 'user_provided' }
