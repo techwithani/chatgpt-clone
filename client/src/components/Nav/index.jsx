@@ -14,6 +14,8 @@ import store from '~/store';
 import { useAuthContext } from '~/hooks/AuthContext';
 import useDebounce from '~/hooks/useDebounce';
 
+import gsap from 'gsap';
+
 // import resolveConfig from 'tailwindcss/resolveConfig';
 // const tailwindConfig = import('../../../tailwind.config.cjs');
 // const fullConfig = resolveConfig(tailwindConfig);
@@ -173,14 +175,21 @@ export default function Nav({ navVisible, setNavVisible }) {
       ? 'flex flex-col gap-2 text-gray-100 text-sm h-full justify-center items-center'
       : 'flex flex-col gap-2 text-gray-100 text-sm';
 
+  useEffect(() => {
+    // When it is visible,select the div class with nav and increment the width to 250px in 0.5s
+    if (navVisible) {
+      // Add the active class to the nav
+      gsap.to('.nav', { width: '250px', duration: 0.5 });
+      gsap.to('.nav', { left: '0px', duration: 0.5 });
+    } else {
+      gsap.to('.nav', { width: '0px', duration: 0.5 });
+      gsap.to('.nav', { left: '-100%', duration: 0.5 });
+    }
+  }, [navVisible]);
+
   return (
     <>
-      <div
-        className={
-          'nav dark bg-gray-900 transition-all duration-500 md:inset-y-0' +
-          (navVisible ? ' active' : '')
-        }
-      >
+      <div className={'nav active dark bg-gray-900 md:inset-y-0'}>
         <div className="flex h-full min-h-0 flex-col ">
           <div className="scrollbar-trigger relative flex h-full w-full flex-1 items-start border-white/20">
             <nav className="relative flex h-full flex-1 flex-col space-y-1 p-2">
