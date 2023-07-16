@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { availableTools } = require('../../app/clients/tools');
+const { addOpenAPISpecs } = require('../../app/clients/tools/util/addOpenAPISpecs');
 
 const getOpenAIModels = (opts = { azure: false }) => {
   let models = [
@@ -13,14 +14,18 @@ const getOpenAIModels = (opts = { azure: false }) => {
     'text-davinci-003',
   ];
   const key = opts.azure ? 'AZURE_OPENAI_MODELS' : 'OPENAI_MODELS';
-  if (process.env[key]) models = String(process.env[key]).split(',');
+  if (process.env[key]) {
+    models = String(process.env[key]).split(',');
+  }
 
   return models;
 };
 
 const getChatGPTBrowserModels = () => {
   let models = ['text-davinci-002-render-sha', 'gpt-4'];
-  if (process.env.CHATGPT_MODELS) models = String(process.env.CHATGPT_MODELS).split(',');
+  if (process.env.CHATGPT_MODELS) {
+    models = String(process.env.CHATGPT_MODELS).split(',');
+  }
 
   return models;
 };
@@ -32,7 +37,9 @@ const getAnthropicModels = () => {
     'claude-instant-1-100k',
     'claude-2',
   ];
-  if (process.env.ANTHROPIC_MODELS) models = String(process.env.ANTHROPIC_MODELS).split(',');
+  if (process.env.ANTHROPIC_MODELS) {
+    models = String(process.env.ANTHROPIC_MODELS).split(',');
+  }
 
   return models;
 };
@@ -46,7 +53,9 @@ const getPluginModels = () => {
     'gpt-3.5-turbo-0613',
     'gpt-3.5-turbo-0301',
   ];
-  if (process.env.PLUGIN_MODELS) models = String(process.env.PLUGIN_MODELS).split(',');
+  if (process.env.PLUGIN_MODELS) {
+    models = String(process.env.PLUGIN_MODELS).split(',');
+  }
 
   return models;
 };
@@ -71,6 +80,15 @@ router.get('/', async function (req, res) {
     }
   }
 
+  const tools = await addOpenAPISpecs(availableTools);
+  function transformToolsToMap(tools) {
+    return tools.reduce((map, obj) => {
+      map[obj.pluginKey] = obj.name;
+      return map;
+    }, {});
+  }
+  const plugins = transformToolsToMap(tools);
+
   const google =
     key || palmUser
       ? { userProvide: palmUser, availableModels: ['chat-bison', 'text-bison', 'codechat-bison'] }
@@ -93,7 +111,7 @@ router.get('/', async function (req, res) {
     openAIApiKey || azureOpenAIApiKey
       ? {
         availableModels: getPluginModels(),
-        availableTools,
+        plugins,
         availableAgents: ['classic', 'functions'],
         userProvide: userProvidedOpenAI,
       }

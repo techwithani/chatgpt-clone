@@ -46,9 +46,13 @@ function verifiedRateLimiter(req, res, next) {
 router.post('/', requireJwtAuth, verifiedRateLimiter, async (req, res) => {
   const { endpoint, text, parentMessageId, conversationId } = req.body;
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  if (text.length === 0) return handleError(res, { text: 'Prompt empty or too short' });
+  if (text.length === 0) {
+    return handleError(res, { text: 'Prompt empty or too short' });
+  }
   const isOpenAI = endpoint === 'openAI' || endpoint === 'azureOpenAI';
-  if (!isOpenAI) return handleError(res, { text: 'Illegal request' });
+  if (!isOpenAI) {
+    return handleError(res, { text: 'Illegal request' });
+  }
 
   // build endpoint option
   const endpointOption = {

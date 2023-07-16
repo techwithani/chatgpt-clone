@@ -36,8 +36,8 @@ https://github.com/techwithanirudh/AnirudhGPT/assets/110412045/c1eb0c0f-41f6-433
 # Features
 - Response streaming identical to ChatGPT through server-sent events
 - UI from original ChatGPT, including Dark mode
-- AI model selection (through 6 endpoints: OpenAI API, BingAI, ChatGPT Browser, PaLM2,  Claude, Plugins)
-- Create, Save, & Share custom presets - [More info on prompt presets here](https://github.com/techwithanirudh/AnirudhGPT/releases/tag/v0.3.0)
+- AI model selection: OpenAI API, BingAI, ChatGPT Browser, PaLM2, Anthropic (Claude), Plugins
+- Create, Save, & Share custom presets - [More info on prompt presets here](https://github.com/danny-avila/LibreChat/releases/tag/v0.3.0)
 - Edit and Resubmit messages with conversation branching
 - Search all messages/conversations - [More info here](https://github.com/techwithanirudh/AnirudhGPT/releases/tag/v0.1.0)
 - Plugins now available (including web access, image generation and more)
@@ -85,6 +85,7 @@ Keep up with the latest updates by visiting the releases page - [Releases](https
     * [Stable Diffusion](docs/features/plugins/stable_diffusion.md)
     * [Wolfram](docs/features/plugins/wolfram.md)
     * [Make Your Own Plugin](docs/features/plugins/make_your_own.md)
+    * [Using official ChatGPT Plugins](docs/features/plugins/chatgpt_plugins_openapi.md)
 
   * [Proxy](docs/features/proxy.md)
   * [Bing Jailbreak](docs/features/bing_jailbreak.md)

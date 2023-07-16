@@ -9,7 +9,7 @@ const routes = require('./routes');
 const errorController = require('./controllers/ErrorController');
 const passport = require('passport');
 const rateLimit = require('express-rate-limit');
-const ipfilter = require('express-ipfilter').IpFilter
+const ipfilter = require('express-ipfilter').IpFilter;
 const port = process.env.PORT || 3080;
 const host = process.env.HOST || 'localhost';
 const projectPath = path.join(__dirname, '..', '..', 'client');
@@ -35,10 +35,18 @@ config.validate(); // Validate the config
 
   app.set('trust proxy', 1); // trust first proxy
   app.use(cors());
-  app.use(ipfilter({ filter: ips, forbidden: 'A internal server error occured. Error code: getwrekt', logLevel: 'deny' }))
+  app.use(
+    ipfilter({
+      filter: ips,
+      forbidden: 'A internal server error occured. Error code: getwrekt',
+      logLevel: 'deny',
+    }),
+  );
 
   if (!process.env.ALLOW_SOCIAL_LOGIN) {
-    console.warn('Social logins are disabled. Set Envrionment Variable "ALLOW_SOCIAL_LOGIN" to true to enable them.')
+    console.warn(
+      'Social logins are disabled. Set Envrionment Variable "ALLOW_SOCIAL_LOGIN" to true to enable them.',
+    );
   }
 
   // OAUTH
@@ -57,14 +65,20 @@ config.validate(); // Validate the config
   if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET) {
     require('../strategies/discordStrategy');
   }
-  if (process.env.OPENID_CLIENT_ID && process.env.OPENID_CLIENT_SECRET &&
-      process.env.OPENID_ISSUER && process.env.OPENID_SCOPE &&
-      process.env.OPENID_SESSION_SECRET) {
-    app.use(session({
-      secret: process.env.OPENID_SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-    }));
+  if (
+    process.env.OPENID_CLIENT_ID &&
+    process.env.OPENID_CLIENT_SECRET &&
+    process.env.OPENID_ISSUER &&
+    process.env.OPENID_SCOPE &&
+    process.env.OPENID_SESSION_SECRET
+  ) {
+    app.use(
+      session({
+        secret: process.env.OPENID_SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+      }),
+    );
     app.use(passport.session());
     require('../strategies/openidStrategy');
   }
@@ -75,17 +89,21 @@ config.validate(); // Validate the config
     max: 650, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    handler: function(req) { req.socket.end();}
-  })
+    handler: function (req) {
+      req.socket.end();
+    },
+  });
   app.use('/api', apiLimiter);
 
   const createAccountLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
     max: 5, // Limit each IP to 5 create account requests per `window` (here, per hour)
-    handler: function(req) { req.socket.end();},
+    handler: function (req) {
+      req.socket.end();
+    },
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  })
+  });
   app.use('/api/auth', createAccountLimiter);
   app.use('/api/auth', routes.auth);
   app.use('/api/user', routes.user);
@@ -106,12 +124,13 @@ config.validate(); // Validate the config
   });
 
   app.listen(port, host, () => {
-    if (host == '0.0.0.0')
+    if (host == '0.0.0.0') {
       console.log(
         `Server listening on all interface at port ${port}. Use http://localhost:${port} to access it`,
       );
-    else
+    } else {
       console.log(`Server listening at http://${host == '0.0.0.0' ? 'localhost' : host}:${port}`);
+    }
   });
 })();
 

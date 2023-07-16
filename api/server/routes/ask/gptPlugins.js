@@ -52,8 +52,12 @@ function verifiedRateLimiter(req, res, next) {
 router.post('/', requireJwtAuth, verifiedRateLimiter, async (req, res) => {
   const { endpoint, text, parentMessageId, conversationId } = req.body;
   const ip = req.headers['x-forwarded-for'];
-  if (text.length === 0) return handleError(res, { text: 'Prompt empty or too short' });
-  if (endpoint !== 'gptPlugins') return handleError(res, { text: 'Illegal request' });
+  if (text.length === 0) {
+    return handleError(res, { text: 'Prompt empty or too short' });
+  }
+  if (endpoint !== 'gptPlugins') {
+    return handleError(res, { text: 'Illegal request' });
+  }
 
   const agentOptions = req.body?.agentOptions ?? {
     agent: 'functions',
@@ -225,11 +229,13 @@ const ask = async ({
     }
     const chatAgent = new PluginsClient(openAIApiKey, clientOptions);
 
-    const onAgentAction = (action) => {
+    const onAgentAction = (action, start = false) => {
       const formattedAction = formatAction(action);
       plugin.inputs.push(formattedAction);
       plugin.latest = formattedAction.plugin;
-      saveMessage(userMessage);
+      if (!start) {
+        saveMessage(userMessage);
+      }
       sendIntermediateMessage(res, { plugin });
       // console.log('PLUGIN ACTION', formattedAction);
     };
