@@ -6,11 +6,13 @@ import { QueryClient, QueryClientProvider, QueryCache } from '@tanstack/react-qu
 import { ThemeProvider } from './hooks/ThemeContext';
 import { useApiErrorBoundary } from './hooks/ApiErrorBoundaryContext';
 import { router } from './routes';
-import Hotjar from '@hotjar/browser';
+import { PostHogProvider } from 'posthog-js/react';
+
+const options = {
+  api_host: 'https://app.posthog.com',
+};
 
 const App = () => {
-  const siteId = 3550792;
-  const hotjarVersion = 6;
   const { setError } = useApiErrorBoundary();
 
   const queryClient = new QueryClient({
@@ -23,14 +25,17 @@ const App = () => {
     }),
   });
 
-  Hotjar.init(siteId, hotjarVersion);
-
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <ThemeProvider>
-          <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} position="top-right" />
+          <PostHogProvider
+            apiKey={'phc_PaLbbj3kvxu2MYdpTshOkviNdQReoobWjFtnlKaGEoi'}
+            options={options}
+          >
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} position="top-right" />
+          </PostHogProvider>
         </ThemeProvider>
       </RecoilRoot>
     </QueryClientProvider>
