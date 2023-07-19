@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://docs-anirudhgpt.techwithanirudh.com">
-    <img src="docs/assets/AnirudhGPT.svg" height="256">
+    <img src="docs/assets/chatgpt-clone.svg" height="256">
   </a>
   <a href="https://docs-anirudhgpt.techwithanirudh.com">
     <h1 align="center">AnirudhGPT</h1>
@@ -31,7 +31,7 @@ AnirudhGPT brings together the future of assistant AIs with the revolutionary te
 
 With AnirudhGPT, you no longer need to opt for ChatGPT Plus and can instead use free or pay-per-call APIs. We welcome contributions, cloning, and forking to enhance the capabilities of this advanced chatbot platform.
   
-<!-- https://github.com/danny-avila/LibreChat/assets/110412045/c1eb0c0f-41f6-4335-b982-84b278b53d59 -->
+<!-- https://github.com/techwithanirudh/chatgpt-clone/assets/110412045/c1eb0c0f-41f6-4335-b982-84b278b53d59 -->
 
 [![Watch the video](https://img.youtube.com/vi/pNIOs1ovsXw/maxresdefault.jpg)](https://youtu.be/pNIOs1ovsXw)
 Click on the thumbnail to open the video☝️
@@ -40,9 +40,9 @@ Click on the thumbnail to open the video☝️
 - Response streaming identical to ChatGPT through server-sent events
 - UI from original ChatGPT, including Dark mode
 - AI model selection: OpenAI API, BingAI, ChatGPT Browser, PaLM2, Anthropic (Claude), Plugins
-- Create, Save, & Share custom presets - [More info on prompt presets here](https://github.com/danny-avila/LibreChat/releases/tag/v0.3.0)
+- Create, Save, & Share custom presets - [More info on prompt presets here](https://github.com/techwithanirudh/chatgpt-clone/releases/tag/v0.3.0)
 - Edit and Resubmit messages with conversation branching
-- Search all messages/conversations - [More info here](https://github.com/techwithanirudh/AnirudhGPT/releases/tag/v0.1.0)
+- Search all messages/conversations - [More info here](https://github.com/techwithanirudh/chatgpt-clone/releases/tag/v0.1.0)
 - Plugins now available (including web access, image generation and more)
 
 ---
@@ -55,7 +55,7 @@ Click on the thumbnail to open the video☝️
 ---
 
 ## Changelog 
-Keep up with the latest updates by visiting the releases page - [Releases](https://github.com/techwithanirudh/AnirudhGPT/releases)
+Keep up with the latest updates by visiting the releases page - [Releases](https://github.com/techwithanirudh/chatgpt-clone/releases)
 
 ---
 
@@ -116,7 +116,7 @@ Keep up with the latest updates by visiting the releases page - [Releases](https
   * [Code Standards and Conventions](docs/contributions/coding_conventions.md)
   * [Testing](docs/contributions/testing.md)
   * [Security](SECURITY.md)
-  * [Trello Board](https://trello.com/b/17z094kq/AnirudhGPT)
+  * [Trello Board](https://trello.com/b/17z094kq/chatgpt-clone)
 </details>
 
 
@@ -124,7 +124,7 @@ Keep up with the latest updates by visiting the releases page - [Releases](https
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=techwithanirudh/AnirudhGPT&type=Date)](https://star-history.com/#techwithanirudh/AnirudhGPT&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=techwithanirudh/chatgpt-clone&type=Date)](https://star-history.com/#techwithanirudh/chatgpt-clone&Date)
 
 ---
 
@@ -146,6 +146,6 @@ For new features, components, or extensions, please open an issue and discuss be
 
 This project exists in its current state thanks to all the people who contribute
 ---
-<a href="https://github.com/techwithanirudh/AnirudhGPT/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=techwithanirudh/AnirudhGPT" />
+<a href="https://github.com/techwithanirudh/chatgpt-clone/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=techwithanirudh/chatgpt-clone" />
 </a>
