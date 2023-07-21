@@ -10,6 +10,7 @@ import { PostHogProvider } from 'posthog-js/react';
 
 const options = {
   api_host: 'https://app.posthog.com',
+  opt_in_site_apps: true,
 };
 
 const App = () => {

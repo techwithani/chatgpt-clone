@@ -16,7 +16,7 @@ const requireJwtAuth = require('../../../middleware/requireJwtAuth');
 
 const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour
-  max: 100,
+  max: 350,
   handler: function (req) {
     req.socket.end();
   },
