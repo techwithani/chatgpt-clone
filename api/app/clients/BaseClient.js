@@ -408,7 +408,6 @@ class BaseClient {
     }
 
     if (tokenCountMap) {
-      // console.dir(tokenCountMap, { depth: null });
       if (tokenCountMap[userMessage.messageId]) {
         userMessage.tokenCount = tokenCountMap[userMessage.messageId];
       }

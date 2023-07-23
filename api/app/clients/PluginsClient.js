@@ -379,7 +379,6 @@ Only respond with your conversational reply to the following User Message:
     );
 
     if (tokenCountMap) {
-      console.dir(tokenCountMap, { depth: null });
       if (tokenCountMap[userMessage.messageId]) {
         userMessage.tokenCount = tokenCountMap[userMessage.messageId];
       }
