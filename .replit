@@ -1,6 +1,6 @@
-
 hidden = [".config", "package-lock.json"]
 run = "cp ./.env.app ./.env && npm run backend"
+entrypoint = "README.md"
 
 [[hints]]
 regex = "Error \\[ERR_REQUIRE_ESM\\]"
