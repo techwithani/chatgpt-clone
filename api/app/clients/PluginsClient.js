@@ -382,7 +382,6 @@ Only respond with your conversational reply to the following User Message:
       console.dir(tokenCountMap, { depth: null });
       if (tokenCountMap[userMessage.messageId]) {
         userMessage.tokenCount = tokenCountMap[userMessage.messageId];
-        console.log('userMessage.tokenCount', userMessage.tokenCount);
       }
       payload = payload.map((message) => {
         const messageWithoutTokenCount = message;

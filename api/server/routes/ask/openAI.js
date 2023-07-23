@@ -207,11 +207,6 @@ const ask = async ({
       response.parentMessageId = overrideParentMessageId;
     }
 
-    console.log(
-      'promptTokens, completionTokens:',
-      response.promptTokens,
-      response.completionTokens,
-    );
     console.log(`AI responds to ${req.user.name}: `, response.text);
     logtail.log(`AI responds to ${req.user.name}: ` + response.text, ip);
 
