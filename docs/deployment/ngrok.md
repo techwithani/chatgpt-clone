@@ -18,11 +18,11 @@ To use Ngrok for tunneling your local server to the internet, follow these steps
 3. Run `ngrok.exe`.
 4. Copy your auth token from https://dashboard.ngrok.com/get-started/your-authtoken.
 5. In the `ngrok.exe` terminal, run the following command: `ngrok config add-authtoken <your token>`
-6. If you haven't done so already, start LibreChat normally.
+6. If you haven't done so already, start AnirudhGPT normally.
 7. In the `ngrok.exe` terminal, run the following command: ngrok http 3080
 
-You will see a link that can be used to access LibreChat.
-![ngrok-1](https://github.com/danny-avila/LibreChat/assets/32828263/3cb4b063-541f-4f0a-bea8-a04dd36e6bf4)
+You will see a link that can be used to access AnirudhGPT.
+![ngrok-1](https://github.com/techwithanirudh/chatgpt-clone/assets/32828263/3cb4b063-541f-4f0a-bea8-a04dd36e6bf4)
 
 ---
 

@@ -1,9 +1,9 @@
 # Project information
-site_name: LibreChat
+site_name: AnirudhGPT
 
 # Repository
-repo_name: danny-avila/LibreChat
-repo_url: https://github.com/danny-avila/LibreChat
+repo_name: techwithanirudh/chatgpt-clone
+repo_url: https://github.com/techwithanirudh/chatgpt-clone
 #edit_uri: ''
 edit_uri: blob/main/docs/
 
@@ -12,7 +12,7 @@ use_directory_urls: false
 
 theme:
   name: material
-  logo: assets/LibreChat.svg
+  logo: assets/AnirudhGPT.svg
   favicon: assets/favicon_package/favicon-32x32.png
 
   palette:
@@ -115,9 +115,9 @@ extra:
     - icon: fontawesome/brands/discord
       link: https://discord.gg/CEe6vDg9Ky
     - icon: fontawesome/brands/github
-      link: https://github.com/danny-avila/LibreChat
+      link: https://github.com/techwithanirudh/chatgpt-clone
     - icon: fontawesome/brands/youtube
-      link: https://www.youtube.com/@LibreChat 
+      link: https://www.youtube.com/@AnirudhGPT 
 
 copyright:
-  © 2023 <a href="https://github.com/danny-avila/LibreChat" target="_blank" rel="noopener">LibreChat</a>
+  © 2023 <a href="https://github.com/techwithanirudh/chatgpt-clone" target="_blank" rel="noopener">AnirudhGPT</a>

@@ -1,5 +1,5 @@
 {
-  "name": "LibreChat",
+  "name": "AnirudhGPT",
   "version": "0.5.5",
   "description": "",
   "workspaces": [
@@ -36,14 +36,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danny-avila/LibreChat.git"
+    "url": "git+https://github.com/techwithanirudh/chatgpt-clone.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/danny-avila/LibreChat/issues"
+    "url": "https://github.com/techwithanirudh/chatgpt-clone/issues"
   },
-  "homepage": "https://github.com/danny-avila/LibreChat#readme",
+  "homepage": "https://github.com/techwithanirudh/chatgpt-clone#readme",
   "dependencies": {
     "@hotjar/browser": "^1.0.9",
     "@logtail/node": "^0.4.0",

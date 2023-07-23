@@ -1,6 +1,6 @@
 # Documentation Guidelines
 
-This document explains how to write and format documentation for LibreChat.
+This document explains how to write and format documentation for AnirudhGPT.
 
 ## New Documents
 - Use lowercase letters and underscores to name new documents (e.g. `documentation_guidelines.md`).
@@ -25,7 +25,7 @@ This document explains how to write and format documentation for LibreChat.
 - All assets should be uploaded in the document from GitHub's webui:
 - **Before submitting a PR, double-check on GitHub that everything is properly displayed and that all links work correctly.**
 
-![image](https://github.com/danny-avila/LibreChat/assets/32828263/4f138ab4-31a5-4fae-a459-5335e5ff25a8)
+![image](https://github.com/techwithanirudh/chatgpt-clone/assets/32828263/4f138ab4-31a5-4fae-a459-5335e5ff25a8)
 
 ## Tips
 - You can check the code of this document to see how it works. 
@@ -36,9 +36,9 @@ This document explains how to write and format documentation for LibreChat.
 ### Example of HTML image embedding:
 <p align="center">
   <a href="https://discord.gg/NGaa9RPCft">
-    <img src="https://github.com/danny-avila/LibreChat/assets/32828263/45890a7c-5b8d-4650-a6e0-aa5d7e4951c3" height="128" width="128">
+    <img src="https://github.com/techwithanirudh/chatgpt-clone/assets/32828263/45890a7c-5b8d-4650-a6e0-aa5d7e4951c3" height="128" width="128">
   </a>
   <a href="https://librechat.ai">
-    <h3 align="center">LibreChat</h3>
+    <h3 align="center">AnirudhGPT</h3>
   </a>
 </p>

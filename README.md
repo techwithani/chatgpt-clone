@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://docs-anirudhgpt.techwithanirudh.com">
-    <img src="docs/assets/LibreChat.svg" height="256">
+    <img src="docs/assets/AnirudhGPT.svg" height="256">
   </a>
   <a href="https://docs-anirudhgpt.techwithanirudh.com">
     <h1 align="center">AnirudhGPT</h1>

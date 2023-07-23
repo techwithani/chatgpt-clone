@@ -28,7 +28,7 @@ To get your Bing Access Token, you have a few options:
 
 - You can try leaving it blank and see if it works (fingers crossed 🤞)
 
-- You can follow these [new instructions](https://github.com/danny-avila/LibreChat/issues/370#issuecomment-1560382302) (thanks @danny-avila for sharing 🙌)
+- You can follow these [new instructions](https://github.com/techwithanirudh/chatgpt-clone/issues/370#issuecomment-1560382302) (thanks @danny-avila for sharing 🙌)
 
 - You can use MS Edge, navigate to bing.com, and do the following:
   - Make sure you are logged in
@@ -108,5 +108,5 @@ These steps are quick workarounds as other solutions would require renaming envi
 
 ---
 
-### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/danny-avila/LibreChat/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
+### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/techwithanirudh/chatgpt-clone/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
 

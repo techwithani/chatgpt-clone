@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danny-avila/LibreChat.git"
+    "url": "git+https://github.com/techwithanirudh/chatgpt-clone.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/danny-avila/LibreChat/issues"
+    "url": "https://github.com/techwithanirudh/chatgpt-clone/issues"
   },
-  "homepage": "https://github.com/danny-avila/LibreChat#readme",
+  "homepage": "https://github.com/techwithanirudh/chatgpt-clone#readme",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.5.4",
     "@dqbd/tiktoken": "^1.0.2",

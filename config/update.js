@@ -84,7 +84,7 @@ function deleteNodeModules(dir) {
     }down --volumes`;
     console.orange(downCommand);
     execSync(downCommand, { stdio: 'inherit' });
-    console.purple('Pruning all LibreChat Docker images...');
+    console.purple('Pruning all AnirudhGPT Docker images...');
 
     const imageName = singleCompose ? 'librechat_single' : 'librechat';
     try {
@@ -94,7 +94,7 @@ function deleteNodeModules(dir) {
     }
     console.purple('Removing all unused dangling Docker images...');
     execSync('docker image prune -f', { stdio: 'inherit' });
-    console.purple('Building new LibreChat image...');
+    console.purple('Building new AnirudhGPT image...');
     const buildCommand = `docker-compose ${
       singleCompose ? '-f ./docs/dev/single-compose.yml ' : ''
     }build`;
@@ -121,10 +121,10 @@ function deleteNodeModules(dir) {
   if (dockerUpdate) {
     startCommand = `docker-compose ${singleCompose ? '-f ./docs/dev/single-compose.yml ' : ''}up`;
   }
-  console.green('Your LibreChat app is now up to date! Start the app with the following command:');
+  console.green('Your AnirudhGPT app is now up to date! Start the app with the following command:');
   console.purple(startCommand);
   console.orange(
-    'Note: it\'s also recommended to clear your browser cookies and localStorage for LibreChat to assure a fully clean installation.',
+    'Note: it\'s also recommended to clear your browser cookies and localStorage for AnirudhGPT to assure a fully clean installation.',
   );
   console.orange('Also: Don\'t worry, your data is safe :)');
 })();

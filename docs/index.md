@@ -1,10 +1,10 @@
 <p align="center">
   <a href="https://discord.gg/NGaa9RPCft">
-    <img src="assets/LibreChat.svg" style="margin-left: 40px; height: 256px; width: 256px;>
+    <img src="assets/AnirudhGPT.svg" style="margin-left: 40px; height: 256px; width: 256px;>
   </a>
   <a href="https://librechat.ai">
     <!-- Use the margin-top property to add some space between the image and the text -->
-    <h1 align="center" style="padding: 0;">LibreChat</h1>
+    <h1 align="center" style="padding: 0;">AnirudhGPT</h1>
   </a>
 </p>
 
@@ -14,11 +14,11 @@
     <img
       src="https://img.shields.io/discord/1086345563026489514?label=&logo=discord&style=for-the-badge&logoWidth=20&logoColor=white&labelColor=000000&color=blueviolet">
   </a>
-  <a href="https://www.youtube.com/@LibreChat"> 
+  <a href="https://www.youtube.com/@AnirudhGPT"> 
     <img
       src="https://img.shields.io/badge/YOUTUBE-red.svg?style=for-the-badge&logo=youtube&logoColor=white&labelColor=000000&logoWidth=20">
   </a>
-  <a href="https://github.com/danny-avila/LibreChat"> 
+  <a href="https://github.com/techwithanirudh/chatgpt-clone"> 
     <img 
       src="https://img.shields.io/badge/GITHUB-blue.svg?style=for-the-badge&logo=github&logoColor=white&labelColor=000000&logoWidth=20">
   </a>
@@ -28,10 +28,10 @@
   </a>
 </p>
 
-## All-In-One AI Conversations with LibreChat ##
-LibreChat brings together the future of assistant AIs with the revolutionary technology of OpenAI's ChatGPT. Celebrating the original styling, LibreChat gives you the ability to integrate multiple AI models. It also integrates and enhances original client features such as conversation and message search, prompt templates and plugins.
+## All-In-One AI Conversations with AnirudhGPT ##
+AnirudhGPT brings together the future of assistant AIs with the revolutionary technology of OpenAI's ChatGPT. Celebrating the original styling, AnirudhGPT gives you the ability to integrate multiple AI models. It also integrates and enhances original client features such as conversation and message search, prompt templates and plugins.
 
-With LibreChat, you no longer need to opt for ChatGPT Plus and can instead use free or pay-per-call APIs. We welcome contributions, cloning, and forking to enhance the capabilities of this advanced chatbot platform.
+With AnirudhGPT, you no longer need to opt for ChatGPT Plus and can instead use free or pay-per-call APIs. We welcome contributions, cloning, and forking to enhance the capabilities of this advanced chatbot platform.
 
 <p align="center">
   <iframe 
@@ -50,9 +50,9 @@ With LibreChat, you no longer need to opt for ChatGPT Plus and can instead use f
 - Response streaming identical to ChatGPT through server-sent events
 - UI from original ChatGPT, including Dark mode
 - AI model selection (through 5 endpoints: OpenAI API, BingAI, ChatGPT Browser, PaLM2, Plugins)
-- Create, Save, & Share custom presets - [More info on prompt presets here](https://github.com/danny-avila/LibreChat/releases/tag/v0.3.0)
+- Create, Save, & Share custom presets - [More info on prompt presets here](https://github.com/techwithanirudh/chatgpt-clone/releases/tag/v0.3.0)
 - Edit and Resubmit messages with conversation branching
-- Search all messages/conversations - [More info here](https://github.com/danny-avila/LibreChat/releases/tag/v0.1.0)
+- Search all messages/conversations - [More info here](https://github.com/techwithanirudh/chatgpt-clone/releases/tag/v0.1.0)
 - Plugins now available (including web access, image generation and more)
 
 ---
@@ -66,7 +66,7 @@ With LibreChat, you no longer need to opt for ChatGPT Plus and can instead use f
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=danny-avila/LibreChat&type=Date)](https://star-history.com/#danny-avila/LibreChat&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=techwithanirudh/chatgpt-clone&type=Date)](https://star-history.com/#techwithanirudh/chatgpt-clone&Date)
 
 ---
 
@@ -88,6 +88,6 @@ For new features, components, or extensions, please open an issue and discuss be
 
 This project exists in its current state thanks to all the people who contribute
 ---
-<a href="https://github.com/danny-avila/LibreChat/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=danny-avila/LibreChat" />
+<a href="https://github.com/techwithanirudh/chatgpt-clone/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=techwithanirudh/chatgpt-clone" />
 </a>

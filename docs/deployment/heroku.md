@@ -1,6 +1,6 @@
 # Heroku Deployment
 
-*To run LibreChat on a server, you can use cloud hosting platforms like Heroku, DigitalOcean, or AWS. In this response, I'll provide instructions for deploying the project on Heroku. Other platforms will have slightly different deployment processes.*
+*To run AnirudhGPT on a server, you can use cloud hosting platforms like Heroku, DigitalOcean, or AWS. In this response, I'll provide instructions for deploying the project on Heroku. Other platforms will have slightly different deployment processes.*
 
 Heroku only supports running a single process within a Docker container. The Dockerfile for this project has two different processes - one is for serving your Node API and the other for serving your client with Nginx. In the context of Heroku, these should be considered two separate apps.
 
@@ -114,7 +114,7 @@ Remember to replace `your-api-app-name` and `your-client-app-name` with the actu
 
 ---
 
- ⚠️ If you have issues, see this discussion first: https://github.com/danny-avila/LibreChat/discussions/339
+ ⚠️ If you have issues, see this discussion first: https://github.com/techwithanirudh/chatgpt-clone/discussions/339
  
 
 ## Using Heroku Dashboard:
@@ -171,16 +171,16 @@ git push heroku master
 ```
 ### Get the MeiliSearch URL: After deployment, you can find the MeiliSearch URL by visiting your app's settings page in the Heroku Dashboard. The URL will be displayed under the "Domains" section.
 
-## Update environment variables in LibreChat:
+## Update environment variables in AnirudhGPT:
 
-  - Now that you have your MongoDB Atlas connection string and MeiliSearch URL, update the following environment variables in your Heroku app for LibreChat:
+  - Now that you have your MongoDB Atlas connection string and MeiliSearch URL, update the following environment variables in your Heroku app for AnirudhGPT:
 
   - `MONGODB_URI`: Set the value to the MongoDB Atlas connection string you obtained earlier.
   - `MEILISEARCH_URL`: Set the value to the MeiliSearch URL you obtained from your MeiliSearch app on Heroku.
   - `MEILISEARCH_KEY`: Set the value to the MeiliSearch master key you used when setting up the MeiliSearch app.
   - You can set these environment variables using the Heroku CLI or through the Heroku Dashboard, as described in the previous response.
 
-  - Once you've updated the environment variables, LibreChat should be able to connect to MongoDB Atlas and MeiliSearch on Heroku.
+  - Once you've updated the environment variables, AnirudhGPT should be able to connect to MongoDB Atlas and MeiliSearch on Heroku.
 
 ```
 heroku config:set KEY_NAME=KEY_VALUE --app your-app-name
@@ -190,5 +190,5 @@ heroku config:set KEY_NAME=KEY_VALUE --app your-app-name
 
 
   
-### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/danny-avila/LibreChat/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
+### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/techwithanirudh/chatgpt-clone/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
 

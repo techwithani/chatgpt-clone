@@ -1,4 +1,4 @@
-<img src="https://github.com/danny-avila/LibreChat/assets/32828263/cfbc7ca5-b51e-4f1d-aa89-b9b4cb13eead" width="350">
+<img src="https://github.com/techwithanirudh/chatgpt-clone/assets/32828263/cfbc7ca5-b51e-4f1d-aa89-b9b4cb13eead" width="350">
 
 # Cloudflare
 ### if you are new to Domain, here's a quick guide to use setup a domain with Cloudflare:
@@ -16,7 +16,7 @@
 - return to the cloudflare tab and tap on `Done, check nameservers`, then `finish later` and `Check nameservers` (this process can take about 5 minutes)
 - in the `DNS` tab select `Records` and `Add Record`
 
-![cloudflare-1](https://github.com/danny-avila/LibreChat/assets/32828263/249574b5-a064-4803-8b08-f95804db0719)
+![cloudflare-1](https://github.com/techwithanirudh/chatgpt-clone/assets/32828263/249574b5-a064-4803-8b08-f95804db0719)
 
   (in the Name section, if you use @ it will use you main domain, but if you want to use a subdomain write it in the Name section)
    - For example: if you want to acces with chat.yourdomain.com just set in the Name section `chat`
@@ -25,17 +25,17 @@
 
 ## Cloudflare Zero Trust extra protection (optional)
 
-If you want to use LibreChat exclusively for yourself or your family and set up an additional layer of protection, you can utilize Cloudflare Zero Trust. Here's how:
+If you want to use AnirudhGPT exclusively for yourself or your family and set up an additional layer of protection, you can utilize Cloudflare Zero Trust. Here's how:
 
 
 ### Setup Application Login: (optional)
 
-Setting up application login with Cloudflare Zero Trust adds extra security but is not recommended for most users because it requires authentication through Cloudflare Zero Trust before accessing LibreChat.
+Setting up application login with Cloudflare Zero Trust adds extra security but is not recommended for most users because it requires authentication through Cloudflare Zero Trust before accessing AnirudhGPT.
 
 - On the left side, click on **Access**, then **Applications**, and add a new application.
 - Select **Self-hosted**, provide an **Application name**, and set a **Session Duration**.
 - In the **Application domain** field, enter the same settings you configured in the Tunnels tab. Then, click **Next**.
-- Set the **Policy name** as "auth" and in the **Configure rules** section, you can define variables for granting access to LibreChat for specific users. Here are some examples:
+- Set the **Policy name** as "auth" and in the **Configure rules** section, you can define variables for granting access to AnirudhGPT for specific users. Here are some examples:
    - **Emails**: You can add specific email addresses that are allowed to access it.
    - **Email ending in**: You can add email addresses that end with a custom domain (e.g., @myorganization.com).
    - **GitHub organization**: You can restrict access to a specific GitHub organization.
@@ -105,7 +105,7 @@ Now that you have installed the tunnel, it's time to configure it. Follow these 
 1. Proceed to the next step and select a public hostname.
 2. Follow the instructions provided in this image to configure it correctly.
    
-![cloudflare-2](https://github.com/danny-avila/LibreChat/assets/32828263/d155b58f-7f59-4372-a3aa-dec2413a3dce)
+![cloudflare-2](https://github.com/techwithanirudh/chatgpt-clone/assets/32828263/d155b58f-7f59-4372-a3aa-dec2413a3dce)
 
 **Note: If the tunnel doesn't work and shows "bad gateway", try using your ip instead of localhost**
 
@@ -113,4 +113,4 @@ Now that you have installed the tunnel, it's time to configure it. Follow these 
 
 ---
 
-### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/danny-avila/LibreChat/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
+### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/techwithanirudh/chatgpt-clone/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
