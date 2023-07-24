@@ -55,7 +55,7 @@ function Settings(props) {
         <div className="col-span-1 flex flex-col items-center justify-start gap-6">
           <div className="grid w-full items-center gap-2">
             <SelectDropDown
-              title="Completion Model (Recommended: GPT-4)"
+              title={localize(lang, 'com_endpoint_completion_model')}
               value={model}
               setValue={setModel}
               availableValues={models}
@@ -84,7 +84,7 @@ function Settings(props) {
                 placeholder={
                   toolsSelected
                     ? localize(lang, 'com_endpoint_disabled_with_tools_placeholder')
-                    : localize(lang, 'com_endpoint_plug_set_custom_name_for_gpt_placeholder')
+                    : localize(lang, 'com_endpoint_openai_custom_name_placeholder')
                 }
                 className={cn(
                   defaultTextProps,
@@ -126,7 +126,10 @@ function Settings(props) {
             <HoverCardTrigger className="grid w-full items-center gap-2">
               <div className="flex justify-between">
                 <Label htmlFor="temp-int" className="text-left text-sm font-medium">
-                  Temperature <small className="opacity-40">{'(default: 0.8)'}</small>
+                  {localize(lang, 'com_endpoint_temperature')}{' '}
+                  <small className="opacity-40">
+                    ({localize(lang, 'com_endpoint_default_with_num', 0.8)})
+                  </small>
                 </Label>
                 <InputNumber
                   id="temp-int"

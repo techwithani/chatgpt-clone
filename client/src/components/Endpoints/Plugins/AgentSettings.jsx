@@ -46,7 +46,7 @@ function Settings(props) {
         <div className="col-span-1 flex flex-col items-center justify-start gap-6">
           <div className="grid w-full items-center gap-2">
             <SelectDropDown
-              title="Agent Model (Recommended: GPT-3.5)"
+              title={localize(lang, 'com_endpoint_agent_model')}
               value={model}
               setValue={setModel}
               availableValues={models}
