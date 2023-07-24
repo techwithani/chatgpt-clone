@@ -1,6 +1,6 @@
 # Security Policy
 
-At AnirudhGPT, we prioritize the security of our project and value the contributions of security researchers in helping us improve the security of our codebase. If you discover a security vulnerability within our project, we appreciate your responsible disclosure. Please follow the guidelines below to report any vulnerabilities to us:
+At LibreChat, we prioritize the security of our project and value the contributions of security researchers in helping us improve the security of our codebase. If you discover a security vulnerability within our project, we appreciate your responsible disclosure. Please follow the guidelines below to report any vulnerabilities to us:
 
 **Note: Only report sensitive vulnerability details via the appropriate private communication channels mentioned below. Public channels, such as GitHub issues and Discord, should be used for initiating contact and establishing private communication channels.**
 
@@ -26,7 +26,7 @@ We strive to acknowledge vulnerability reports within 72 hours and will keep you
 
 ## Security Updates and Patching
 
-We are committed to maintaining the security of our open-source project, AnirudhGPT, and promptly addressing any identified vulnerabilities. To ensure the security of our project, we adhere to the following practices:
+We are committed to maintaining the security of our open-source project, LibreChat, and promptly addressing any identified vulnerabilities. To ensure the security of our project, we adhere to the following practices:
 
 - We prioritize security updates for the current major release of our software.
 - We actively monitor the GitHub Security Advisory system and the `#issues` channel on Discord for any vulnerability reports.
@@ -39,11 +39,11 @@ Please note that as a security-conscious community, we may not always disclose d
 
 This security policy applies to the following GitHub repository:
 
-- Repository: [AnirudhGPT](https://github.com/techwithanirudh/chatgpt-clone)
+- Repository: [LibreChat](https://github.com/danny-avila/LibreChat)
 
 ## Contact
 
-If you have any questions or concerns regarding the security of our project, please join our [Discord community](https://discord.gg/NGaa9RPCft) and report them in the appropriate channel. You can also reach out to us by [opening an issue](https://github.com/techwithanirudh/chatgpt-clone/issues/new) on GitHub. Please note that the response time may vary depending on the nature and severity of the inquiry.
+If you have any questions or concerns regarding the security of our project, please join our [Discord community](https://discord.gg/NGaa9RPCft) and report them in the appropriate channel. You can also reach out to us by [opening an issue](https://github.com/danny-avila/LibreChat/issues/new) on GitHub. Please note that the response time may vary depending on the nature and severity of the inquiry.
 
 ## Acknowledgments
 

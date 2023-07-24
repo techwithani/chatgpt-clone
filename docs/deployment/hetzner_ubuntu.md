@@ -83,7 +83,7 @@ sudo reboot
 From the *server* commandline (as your user, not root):
 
 ```
-git clone https://github.com/techwithanirudh/chatgpt-clone.git
+git clone https://github.com/danny-avila/LibreChat.git
 ```
 
 Edit your docker-compose.yml to endure you have the correct environment variables:
@@ -93,7 +93,7 @@ nano docker-compose.yml
 ```
 
 ```
-       VITE_APP_TITLE: AnirudhGPT # default, change to your desired app >
+       VITE_APP_TITLE: LibreChat # default, change to your desired app >
        VITE_SHOW_GOOGLE_LOGIN_OPTION: 'false'  # default, change to true if you want to show google login
 ```       
 
@@ -137,4 +137,4 @@ ALLOW_REGISTRATION:False
 
 ---
 
-### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/techwithanirudh/chatgpt-clone/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
+### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/danny-avila/LibreChat/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.

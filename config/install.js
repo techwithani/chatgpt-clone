@@ -52,13 +52,13 @@ let env = {};
 
 (async () => {
   // Lets colour the console
-  console.purple('=== AnirudhGPT First Install ===');
+  console.purple('=== LibreChat First Install ===');
   console.blue('Note: Leave blank to use the default value.');
   console.log(''); // New line
 
   // Ask for the app title
-  const title = await askQuestion('Enter the app title (default: "AnirudhGPT"): ');
-  env['APP_TITLE'] = title || 'AnirudhGPT';
+  const title = await askQuestion('Enter the app title (default: "LibreChat"): ');
+  env['APP_TITLE'] = title || 'LibreChat';
 
   // Ask for OPENAI_API_KEY
   const key = await askQuestion('Enter your OPENAI_API_KEY (default: "user_provided"): ');
@@ -74,9 +74,9 @@ let env = {};
 
   // Ask about mongodb
   const mongodb = await askQuestion(
-    'What is your mongodb url? (default: mongodb://127.0.0.1:27017/AnirudhGPT)',
+    'What is your mongodb url? (default: mongodb://127.0.0.1:27017/LibreChat)',
   );
-  env['MONGO_URI'] = mongodb || 'mongodb://127.0.0.1:27017/AnirudhGPT';
+  env['MONGO_URI'] = mongodb || 'mongodb://127.0.0.1:27017/LibreChat';
   // Very basic check to make sure they entered a url
   if (!env['MONGO_URI'].includes('://')) {
     console.orange(

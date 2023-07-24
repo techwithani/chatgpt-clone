@@ -3,13 +3,13 @@
 ## v0.5.5
 Some users have reported an error after updating their docker containers.
 
-![image](https://github.com/fuegovic/AnirudhGPT/assets/32828263/1265d664-5a9c-47d2-b405-47bc0d029a8d)
+![image](https://github.com/fuegovic/LibreChat/assets/32828263/1265d664-5a9c-47d2-b405-47bc0d029a8d)
 
 - To fix this error, you need to:
-  - Delete the AnirudhGPT image in docker 🗑️
+  - Delete the LibreChat image in docker 🗑️
     
     **(leave mongo intact to preserve your profiles and history)** 
-    ![image](https://github.com/fuegovic/AnirudhGPT/assets/32828263/acf15682-435e-44bd-8873-a5dceb3121cc)
+    ![image](https://github.com/fuegovic/LibreChat/assets/32828263/acf15682-435e-44bd-8873-a5dceb3121cc)
   - Repeat the docker update process: 🚀
     - `docker-compose build`
     - `docker-compose up -d`
@@ -59,7 +59,7 @@ ANTHROPIC_MODELS=claude-1,claude-instant-1,claude-2
 ### Summary
 - In this version, we have simplified the configuration process, improved the security of your credentials, and updated the docker instructions. 🚀
 - Please read the following sections carefully to learn how to upgrade your app and avoid any issues. 🙏
-- **Note:** If you're having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/techwithanirudh/chatgpt-clone/discussions/new?category=troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
+- **Note:** If you're having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/danny-avila/LibreChat/discussions/new?category=troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
 
 ---
 

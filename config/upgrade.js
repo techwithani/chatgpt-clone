@@ -134,7 +134,7 @@ fs.appendFileSync(
   '\n\n##########################\n# Frontend Vite Variables:\n##########################\n',
 );
 const frontend = {
-  APP_TITLE: initEnv['VITE_APP_TITLE'] || '"AnirudhGPT"',
+  APP_TITLE: initEnv['VITE_APP_TITLE'] || '"LibreChat"',
   ALLOW_REGISTRATION: 'true',
 };
 loader.writeEnvFile(rootEnvPath, frontend);

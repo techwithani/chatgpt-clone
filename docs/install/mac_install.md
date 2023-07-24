@@ -12,8 +12,8 @@
 
  ## Instructions:
 
-  - Open Terminal and clone the repository by running `git clone https://github.com/techwithanirudh/chatgpt-clone.git`
-  - Change into the cloned directory by running cd AnirudhGPT
+  - Open Terminal and clone the repository by running `git clone https://github.com/danny-avila/LibreChat.git`
+  - Change into the cloned directory by running cd LibreChat
   - If using MongoDB Atlas, remove &w=majority from the default connection string
 Follow the instructions for setting up proxies, access tokens, and user system:
   
@@ -47,7 +47,7 @@ chmod +x meilisearch-macos-amd64
 ./meilisearch-macos-amd64 --master-key your_master_key_goes_here
 ```
 
-  - MeiliSearch will start running on the default port, which is 7700. You can now use MeiliSearch in your AnirudhGPT project.
+  - MeiliSearch will start running on the default port, which is 7700. You can now use MeiliSearch in your LibreChat project.
 
   - Remember to include the MeiliSearch URL and Master Key in your .env file in the api directory. Your .env file should include the following lines:
 
@@ -56,16 +56,16 @@ MEILISEARCH_URL=http://127.0.0.1:7700
 MEILISEARCH_KEY=your_master_key_goes_here
 ```
 
-  - With MeiliSearch running and configured, the AnirudhGPT project should now have the Conversation search feature enabled.
+  - With MeiliSearch running and configured, the LibreChat project should now have the Conversation search feature enabled.
 
-  - In the AnirudhGPT directory, start the application by running `npm run backend`
+  - In the LibreChat directory, start the application by running `npm run backend`
 Visit http://localhost:3080 (default port) & enjoy
 
 ## Optional but recommended:
 
-  - Create a script to automate the starting process by creating a new file named start_chatgpt.sh in the AnirudhGPT directory and pasting the following code:
+  - Create a script to automate the starting process by creating a new file named start_chatgpt.sh in the LibreChat directory and pasting the following code:
 
-``` bash title="AnirudhGPT.sh"
+``` bash title="LibreChat.sh"
 #!/bin/bash
 # Replace "your_master_key_goes_here" with your MeiliSearch Master Key
 if [ -x "$(command -v ./meilisearch)" ]; then
@@ -80,7 +80,7 @@ npm run backend
   chmod +x start_chatgpt.sh
 ```
 
-### **Start AnirudhGPT by running** 
+### **Start LibreChat by running** 
 ```
   ./start_chatgpt.sh
 ```
@@ -93,4 +93,4 @@ npm run backend
 
 ---
 
-### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/techwithanirudh/chatgpt-clone/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
+### Note: If you're still having trouble, before creating a new issue, please search for similar ones on our [#issues thread on our discord](https://discord.gg/weqZFtD9C4) or our [troubleshooting discussion](https://github.com/danny-avila/LibreChat/discussions/categories/troubleshooting) on our Discussions page. If you don't find a relevant issue, feel free to create a new one and provide as much detail as possible.
