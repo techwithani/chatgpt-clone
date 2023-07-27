@@ -16,7 +16,7 @@ import {
   useGetUserQuery,
   useRefreshTokenMutation,
   TLoginUser,
-} from '@librechat/data-provider';
+} from 'librechat-data-provider';
 import { useNavigate } from 'react-router-dom';
 import { usePostHog } from 'posthog-js/react';
 

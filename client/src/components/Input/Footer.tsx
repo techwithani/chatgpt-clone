@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGetStartupConfig } from '@librechat/data-provider';
+import { useGetStartupConfig } from 'librechat-data-provider';
 
 export default function Footer() {
   const { data: config } = useGetStartupConfig();
@@ -10,11 +10,7 @@ export default function Footer() {
         OpenAI
       </a>
       . Free API Keys Provided by{' '}
-      <a
-        href="#"
-        rel="noreferrer"
-        className="underline"
-      >
+      <a href="#" rel="noreferrer" className="underline">
         Secret Service
       </a>
       . Prompts by{' '}
