@@ -30,7 +30,11 @@ try {
 const abortControllers = new Map();
 
 router.post('/abort', requireJwtAuth, async (req, res) => {
-  return await abortMessage(req, res, abortControllers);
+  try {
+    return await abortMessage(req, res, abortControllers);
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 function verifiedRateLimiter(req, res, next) {
