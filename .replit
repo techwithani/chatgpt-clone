@@ -1,5 +1,4 @@
 hidden = [".config", "package-lock.json"]
-onBoot = "./meilisearch --master-key $MEILI_MASTER_KEY --http-addr 'localhost:7700' --log-level ERROR"
 run = "sh run.sh"
 entrypoint = "README.md"
 
