@@ -2,7 +2,12 @@ import { Download } from 'lucide-react';
 import { useRecoilValue } from 'recoil';
 import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { SearchBar, ClearConvos, Settings, NavLink, Logout, ExportModel } from './';
+import SearchBar from './SearchBar';
+import ClearConvos from './ClearConvos';
+import Settings from './Settings';
+import NavLink from './NavLink';
+import Logout from './Logout';
+import { ExportModel } from './ExportConversation';
 import { LinkIcon, DotsIcon, GearIcon, TrashIcon } from '~/components';
 import { localize } from '~/localization/Translation';
 import { useAuthContext } from '~/hooks/AuthContext';
@@ -101,7 +106,9 @@ export default function NavLinks({ clearSearch, isSearchEnabled }) {
                     className="flex w-full cursor-pointer items-center gap-3 rounded-none px-3 py-3 text-sm text-white transition-colors duration-200 hover:bg-gray-700"
                     svg={() => <LinkIcon />}
                     text={localize(lang, 'com_nav_help_faq')}
-                    clickHandler={() => window.open('https://docs-anirudhgpt.techwithanirudh.com/', '_blank')}
+                    clickHandler={() =>
+                      window.open('https://docs-anirudhgpt.techwithanirudh.com/', '_blank')
+                    }
                   />
                 </Menu.Item>
                 <Menu.Item as="div">
