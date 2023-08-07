@@ -45,7 +45,7 @@ config.validate(); // Validate the config
   app.use(
     ipfilter({
       filter: ips,
-      forbidden: 'A internal server error occured. Error code: getwrekt',
+      forbidden: 'A internal server error occured. Error code: tryharder',
       logLevel: 'deny',
     }),
   );
@@ -103,8 +103,8 @@ config.validate(); // Validate the config
   app.use('/api', apiLimiter);
 
   const createAccountLimiter = rateLimit({
-    windowMs: 60 * 60 * 1000, // 1 hour
-    max: 5, // Limit each IP to 5 create account requests per `window` (here, per hour)
+    windowMs: 24 * 60 * 60 * 1000, // 1 day
+    max: 1, // Limit each IP to 1 create account requests per `window` (here, per hour)
     handler: function (req) {
       req.socket.end();
     },
