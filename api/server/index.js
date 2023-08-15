@@ -45,7 +45,7 @@ config.validate(); // Validate the config
   app.use(
     ipfilter({
       filter: ips,
-      forbidden: 'A internal server error occured. Error code: tryharder',
+      forbidden: 'A internal server error occured. Error code: getwrekt',
       logLevel: 'deny',
     }),
   );
