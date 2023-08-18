@@ -130,10 +130,10 @@ export default function TextChat({ isSearchView = false }) {
         className="no-gradient-sm fixed bottom-0 left-0 w-full pt-6 sm:bg-gradient-to-b md:absolute"
         style={{
           background: `linear-gradient(to bottom, 
-                ${isDark ? '#0a3b5c00' : 'rgba(255, 255, 255, 0)'}, 
-                ${isDark ? '#0a3b5c14' : 'rgba(255, 255, 255, 0.08)'}, 
-                ${isDark ? '#0a3b5c61' : 'rgba(255, 255, 255, 0.38)'}, 
-                ${isDark ? '#0a3b5c' : 'rgba(255, 255, 255, 1)'}, 
+                ${isDark ? 'rgba(10, 59, 92, 0)' : 'rgba(255, 255, 255, 0)'}, 
+                ${isDark ? 'rgba(10, 59, 92, 0.08)' : 'rgba(255, 255, 255, 0.08)'}, 
+                ${isDark ? 'rgba(10, 59, 92, 0.38)' : 'rgba(255, 255, 255, 0.38)'}, 
+                ${isDark ? 'rgba(10, 59, 92, 1)' : 'rgba(255, 255, 255, 1)'}, 
                 ${isDark ? '#0a3b5c' : '#ffffff'})`,
         }}
       >

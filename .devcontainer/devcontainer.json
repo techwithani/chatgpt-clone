@@ -30,14 +30,14 @@
   // Set *default* container specific settings.json values on container create.
   // "overrideCommand": true,
   "customizations": {
-    "vscode": {
-      "extensions": [],
-      "settings": {
-        "terminal.integrated.profiles.linux": {
-          "bash": null
-        }
+      "vscode": {
+          "extensions": [],
+          "settings": {
+              "terminal.integrated.profiles.linux": {
+                  "bash": null
+              }
+          }
       }
-    }
   },
   "postCreateCommand": "",
   // "workspaceMount": "src=${localWorkspaceFolder},dst=/code,type=bind,consistency=cached"
@@ -54,5 +54,5 @@
   // "settings": {
   //     "terminal.integrated.shell.linux": "/bin/bash"
   // },
-  "features": { "ghcr.io/devcontainers/features/git:1": {} }
+  "features": {"ghcr.io/devcontainers/features/git:1": {}}
 }
