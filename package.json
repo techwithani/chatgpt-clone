@@ -92,7 +92,8 @@
       "api/data/",
       "data",
       "client/",
-      "admin/"
+      "admin/",
+      "packages/"
     ]
   }
 }
