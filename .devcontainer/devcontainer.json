@@ -21,38 +21,38 @@
 // 	// "remoteUser": "vscode"
 // }
 {
-  // "name": "LibreChat_dev",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
-  // "image": "node:19-alpine",
-  // "workspaceFolder": "/workspaces",
-  "workspaceFolder": "/workspace",
-  // Set *default* container specific settings.json values on container create.
-  // "overrideCommand": true,
-  "customizations": {
-      "vscode": {
-          "extensions": [],
-          "settings": {
-              "terminal.integrated.profiles.linux": {
-                  "bash": null
-              }
-          }
-      }
-  },
-  "postCreateCommand": "",
-  // "workspaceMount": "src=${localWorkspaceFolder},dst=/code,type=bind,consistency=cached"
+    // "name": "LibreChat_dev",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    // "image": "node:19-alpine",
+    // "workspaceFolder": "/workspaces",
+    "workspaceFolder": "/workspace",
+    // Set *default* container specific settings.json values on container create.
+    // "overrideCommand": true,
+    "customizations": {
+        "vscode": {
+            "extensions": [],
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "bash": null
+                }
+            }
+        }
+    },
+    "postCreateCommand": "",
+    // "workspaceMount": "src=${localWorkspaceFolder},dst=/code,type=bind,consistency=cached"
 
-  // "runArgs": [
-  //     "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
-  //     "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
-  //     "-v", "${env:XAUTHORITY}:/root/.Xauthority:rw",
-  //     "-v", "/home/${env:USER}/.cdh:/root/.cdh",
-  //     "-e", "DISPLAY=${env:DISPLAY}",
-  //     "--name=tgw_assistant_backend_dev",
-  //     "--network=host"
-  // ],
-  // "settings": {
-  //     "terminal.integrated.shell.linux": "/bin/bash"
-  // },
-  "features": {"ghcr.io/devcontainers/features/git:1": {}}
+    // "runArgs": [
+    //     "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
+    //     "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+    //     "-v", "${env:XAUTHORITY}:/root/.Xauthority:rw",
+    //     "-v", "/home/${env:USER}/.cdh:/root/.cdh",
+    //     "-e", "DISPLAY=${env:DISPLAY}",
+    //     "--name=tgw_assistant_backend_dev",
+    //     "--network=host"
+    // ],
+    // "settings": {
+    //     "terminal.integrated.shell.linux": "/bin/bash"
+    // },
+    "features": {"ghcr.io/devcontainers/features/git:1": {}}
 }
