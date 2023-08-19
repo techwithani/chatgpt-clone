@@ -47,7 +47,7 @@ const AuthContextProvider = ({
   authConfig,
   children,
 }: {
-  authConfig: TAuthConfig;
+  authConfig?: TAuthConfig;
   children: ReactNode;
 }) => {
   const [user, setUser] = useState<TUser | undefined>(undefined);
