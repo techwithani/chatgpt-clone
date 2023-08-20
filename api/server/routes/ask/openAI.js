@@ -64,9 +64,8 @@ router.post(
     } = req.body;
     const ip = req.headers['x-forwarded-for'];
 
-    console.log('ask log');
+    console.log(req.user.name + ': ' + text);
     logtail.log(req.user.name + ': ' + text, ip);
-    console.dir({ text, conversationId, endpointOption }, { depth: null });
 
     let metadata;
     let userMessage;
