@@ -67,8 +67,8 @@ const startServer = async () => {
   app.use('/api', apiLimiter);
 
   const createAccountLimiter = rateLimit({
-    windowMs: 24 * 60 * 60 * 1000, // 1 day
-    max: 1, // Limit each IP to 1 create account requests per `window` (here, per hour)
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 15, // Limit each IP to 15 create accounts per `window` (here, per hour)
     handler: function (req) {
       req.socket.end();
     },
