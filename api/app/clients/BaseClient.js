@@ -449,11 +449,11 @@ class BaseClient {
     }
 
     if (tokenCountMap) {
-      console.dir(tokenCountMap, { depth: null });
+      // console.dir(tokenCountMap, { depth: null });
       if (tokenCountMap[userMessage.messageId]) {
         userMessage.tokenCount = tokenCountMap[userMessage.messageId];
-        console.log('userMessage.tokenCount', userMessage.tokenCount);
-        console.log('userMessage', userMessage);
+        // console.log('userMessage.tokenCount', userMessage.tokenCount);
+        // console.log('userMessage', userMessage);
       }
 
       payload = payload.map((message) => {

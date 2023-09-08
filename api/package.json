@@ -25,6 +25,7 @@
     "@dqbd/tiktoken": "^1.0.7",
     "@fortaine/fetch-event-source": "^3.0.6",
     "@keyv/mongo": "^2.1.8",
+    "@logtail/node": "^0.4.6",
     "@waylaidwanderer/chatgpt-api": "^1.37.2",
     "axios": "^1.3.4",
     "bcryptjs": "^2.4.3",

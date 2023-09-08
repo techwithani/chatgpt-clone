@@ -18,6 +18,7 @@ import {
   TLoginUser,
 } from 'librechat-data-provider';
 import { useNavigate } from 'react-router-dom';
+import { usePostHog } from 'posthog-js/react';
 
 export type TAuthContext = {
   user: TUser | undefined;
@@ -55,6 +56,7 @@ const AuthContextProvider = ({
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const posthog = usePostHog();
 
   const loginUser = useLoginUserMutation();
   const logoutUser = useLogoutUserMutation();
@@ -76,6 +78,11 @@ const AuthContextProvider = ({
     (userContext: TUserContext) => {
       const { token, isAuthenticated, user, redirect } = userContext;
       if (user) {
+        posthog?.identify(user.id, {
+          email: user.email,
+          name: user.name,
+        });
+        console.log(user, user.email, 'POG');
         setUser(user);
       }
       setToken(token);
@@ -115,6 +122,7 @@ const AuthContextProvider = ({
     });
     logoutUser.mutate(undefined, {
       onSuccess: () => {
+        posthog.reset();
         setUserContext({
           token: undefined,
           isAuthenticated: false,

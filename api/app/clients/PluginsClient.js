@@ -271,10 +271,10 @@ class PluginsClient extends OpenAIClient {
     );
 
     if (tokenCountMap) {
-      console.dir(tokenCountMap, { depth: null });
+      // console.dir(tokenCountMap, { depth: null });
       if (tokenCountMap[userMessage.messageId]) {
         userMessage.tokenCount = tokenCountMap[userMessage.messageId];
-        console.log('userMessage.tokenCount', userMessage.tokenCount);
+        // console.log('userMessage.tokenCount', userMessage.tokenCount);
       }
       payload = payload.map((message) => {
         const messageWithoutTokenCount = message;

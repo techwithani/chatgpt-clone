@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { Logtail } = require('@logtail/node');
 const { getResponseSender } = require('../endpoints/schemas');
 const { validateTools } = require('../../../app');
 const { addTitle } = require('../endpoints/openAI');
@@ -15,6 +16,18 @@ const {
   validateEndpoint,
   buildEndpointOption,
 } = require('../../middleware');
+
+var logtail;
+try {
+  logtail = new Logtail(process.env.LOGTAIL_TOKEN);
+} catch {
+  logtail = {
+    log: () => {},
+    info: () => {},
+    error: () => {},
+    flush: () => {},
+  };
+}
 
 router.post('/abort', requireJwtAuth, handleAbort());
 
@@ -32,8 +45,11 @@ router.post(
       parentMessageId = null,
       overrideParentMessageId = null,
     } = req.body;
-    console.log('ask log');
-    console.dir({ text, conversationId, endpointOption }, { depth: null });
+    const ip = req.headers['x-forwarded-for'];
+
+    console.log(req.user.name + ': ' + text);
+    logtail.log(req.user.name + ': ' + text, ip);
+
     let metadata;
     let userMessage;
     let userMessageId;
@@ -191,8 +207,11 @@ router.post(
         response = { ...response, ...metadata };
       }
 
-      console.log('CLIENT RESPONSE');
-      console.dir(response, { depth: null });
+      // console.log('CLIENT RESPONSE');
+      // console.dir(response, { depth: null });
+      console.log(`AI responds to ${req.user.name}: `, response.text);
+      logtail.log(`AI responds to ${req.user.name}: ` + response.text, ip);
+      logtail.flush();
       response.plugins = plugins.map((p) => ({ ...p, loading: false }));
       await saveMessage(response);
 
@@ -214,6 +233,11 @@ router.post(
       }
     } catch (error) {
       const partialText = getPartialText();
+
+      console.error(error);
+      logtail.error(error);
+      logtail.flush();
+
       handleAbortError(res, req, error, {
         partialText,
         conversationId,
