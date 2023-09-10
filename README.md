@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://docs-anirudhgpt.techwithanirudh.com">
-    <img src="docs/assets/AnirudhGPT.svg" height="256">
+    <img src="docs/assets/LibreChat.svg" height="256">
   </a>
   <a href="https://docs-anirudhgpt.techwithanirudh.com">
     <h1 align="center">AnirudhGPT</h1>
@@ -8,10 +8,6 @@
 </p>
 
 <p align="center">
-  <a href="https://discord.gg/NGaa9RPCft"> 
-    <img
-      src="https://img.shields.io/discord/1086345563026489514?label=&logo=discord&style=for-the-badge&logoWidth=20&logoColor=white&labelColor=000000&color=blueviolet">
-  </a>
   <a href="https://www.youtube.com/@AnirudhGPT"> 
     <img
       src="https://img.shields.io/badge/YOUTUBE-red.svg?style=for-the-badge&logo=youtube&logoColor=white&labelColor=000000&logoWidth=20">
@@ -19,10 +15,6 @@
   <a href="https://docs-anirudhgpt.techwithanirudh.com"> 
     <img
       src="https://img.shields.io/badge/DOCS-blue.svg?style=for-the-badge&logo=read-the-docs&logoColor=white&labelColor=000000&logoWidth=20">
-  </a>
-  <a aria-label="Sponsors" href="#sponsors">
-    <img
-      src="https://img.shields.io/badge/SPONSORS-brightgreen.svg?style=for-the-badge&logo=github-sponsors&logoColor=white&labelColor=000000&logoWidth=20">
   </a>
 </p>
 
@@ -32,9 +24,6 @@ AnirudhGPT brings together the future of assistant AIs with the revolutionary te
 With AnirudhGPT, you no longer need to opt for ChatGPT Plus and can instead use free or pay-per-call APIs. We welcome contributions, cloning, and forking to enhance the capabilities of this advanced chatbot platform.
   
 <!-- https://github.com/techwithanirudh/chatgpt-clone/assets/110412045/c1eb0c0f-41f6-4335-b982-84b278b53d59 -->
-
-[![Watch the video](https://img.youtube.com/vi/pNIOs1ovsXw/maxresdefault.jpg)](https://youtu.be/pNIOs1ovsXw)
-Click on the thumbnail to open the video☝️
 
 # Features
 - Response streaming identical to ChatGPT through server-sent events
@@ -134,12 +123,6 @@ Keep up with the latest updates by visiting the releases page - [Releases](https
 
 [![Star History Chart](https://api.star-history.com/svg?repos=techwithanirudh/chatgpt-clone&type=Date)](https://star-history.com/#techwithanirudh/chatgpt-clone&Date)
 
----
-
-## Sponsors
-
-  Sponsored by <a href="https://github.com/mjtechguy"><b>@mjtechguy</b></a>, <a href="https://github.com/SphaeroX"><b>@SphaeroX</b></a>, <a href="https://github.com/DavidDev1334"><b>@DavidDev1334</b></a>, <a href="https://github.com/fuegovic"><b>@fuegovic</b></a>, <a href="https://github.com/Pharrcyde"><b>@Pharrcyde</b></a> 
-  
 ---
 
 ## Contributors
