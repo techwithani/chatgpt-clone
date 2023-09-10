@@ -117,7 +117,7 @@ export default {
   com_endpoint_default_empty: 'padrão: vazio',
   com_endpoint_default_with_num: 'padrão: {0}',
   com_endpoint_context: 'Contexto',
-  com_endpoint_tone_style: 'Estilo de Tom',
+  com_endpoint_tone_style: 'Personalidade',
   com_endpoint_token_count: 'Contagem de Tokens',
   com_endpoint_output: 'Saída',
   com_endpoint_google_temp:
@@ -206,20 +206,25 @@ export default {
   com_endpoint_config_key_encryption: 'Sua chave será criptografada e excluída em',
   com_endpoint_config_key_expiry: 'Tempo de expiração',
   com_endpoint_config_key_import_json_key: 'Importar Chave JSON de Conta de Serviço.',
-  com_endpoint_config_key_import_json_key_success: 'Chave JSON de Conta de Serviço Importada com Sucesso',
-  com_endpoint_config_key_import_json_key_invalid: 'Chave JSON de Conta de Serviço Inválida. Você importou o arquivo correto?',
+  com_endpoint_config_key_import_json_key_success:
+    'Chave JSON de Conta de Serviço Importada com Sucesso',
+  com_endpoint_config_key_import_json_key_invalid:
+    'Chave JSON de Conta de Serviço Inválida. Você importou o arquivo correto?',
   com_endpoint_config_key_get_edge_key: 'Para obter seu token de acesso para o Bing, faça login em',
-  com_endpoint_config_key_get_edge_key_dev_tool: 'Use ferramentas de desenvolvimento ou uma extensão enquanto estiver conectado ao site para copiar o conteúdo do cookie _U. Se isso falhar, siga estas',
+  com_endpoint_config_key_get_edge_key_dev_tool:
+    'Use ferramentas de desenvolvimento ou uma extensão enquanto estiver conectado ao site para copiar o conteúdo do cookie _U. Se isso falhar, siga estas',
   com_endpoint_config_key_edge_instructions: 'instruções',
   com_endpoint_config_key_edge_full_key_string: 'para fornecer as sequências completas de cookies.',
-  com_endpoint_config_key_chatgpt: 'Para obter seu token de acesso para o ChatGPT \'Versão Gratuita\', faça login em',
+  com_endpoint_config_key_chatgpt:
+    'Para obter seu token de acesso para o ChatGPT \'Versão Gratuita\', faça login em',
   com_endpoint_config_key_chatgpt_then_visit: 'depois visite',
   com_endpoint_config_key_chatgpt_copy_token: 'Copie o token de acesso.',
   com_endpoint_config_key_google_need_to: 'Você precisa',
   com_endpoint_config_key_google_vertex_ai: 'Ativar Vertex AI',
   com_endpoint_config_key_google_vertex_api: 'API no Google Cloud, em seguida,',
   com_endpoint_config_key_google_service_account: 'Criar uma Conta de Serviço',
-  com_endpoint_config_key_google_vertex_api_role: 'Certifique-se de clicar em \'Criar e Continuar\' para atribuir pelo menos a função de \'Usuário Vertex AI\'. Por fim, crie uma chave JSON para importar aqui.',
+  com_endpoint_config_key_google_vertex_api_role:
+    'Certifique-se de clicar em \'Criar e Continuar\' para atribuir pelo menos a função de \'Usuário Vertex AI\'. Por fim, crie uma chave JSON para importar aqui.',
   com_nav_export_filename: 'Nome do Arquivo',
   com_nav_export_filename_placeholder: 'Defina o nome do arquivo',
   com_nav_export_type: 'Tipo',
