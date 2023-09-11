@@ -24,7 +24,7 @@
     "upgrade": "node config/upgrade.js",
     "create-user": "node config/create-user.js",
     "backend": "cross-env NODE_ENV=production node api/server/index.js",
-    "backend:dev": "cross-env NODE_ENV=development npx nodemon api/server/index.js",
+    "backend:dev": "cross-env NODE_ENV=production npx nodemon api/server/index.js",
     "backend:stop": "node config/stop-backend.js",
     "build:data-provider": "cd packages/data-provider && npm run build",
     "frontend": "npm run build:data-provider && cd client && npm run build",
@@ -34,6 +34,8 @@
     "e2e:ci": "playwright test --config=e2e/playwright.config.ts",
     "e2e:debug": "cross-env PWDEBUG=1 playwright test --config=e2e/playwright.config.local.ts",
     "e2e:codegen": "npx playwright codegen --load-storage=e2e/storageState.json http://localhost:3080/chat/new",
+    "e2e:login": "npx playwright codegen --save-storage=e2e/auth.json http://localhost:3080/login",
+    "e2e:github": "act -W .github/workflows/playwright.yml --secret-file my.secrets",
     "test:client": "cd client && npm run test",
     "test:api": "cd api && npm run test",
     "e2e:update": "playwright test --config=e2e/playwright.config.js --update-snapshots",
@@ -41,7 +43,14 @@
     "prepare": "node config/prepare.js",
     "lint:fix": "eslint --fix \"{,!(node_modules)/**/}*.{js,jsx,ts,tsx}\"",
     "lint": "eslint \"{,!(node_modules)/**/}*.{js,jsx,ts,tsx}\"",
-    "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{js,jsx,ts,tsx}\""
+    "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{js,jsx,ts,tsx}\"",
+    "b:api": "NODE_ENV=production bun run api/server/index.js",
+    "b:api:dev": "NODE_ENV=development bun run --watch api/server/index.js",
+    "b:data-provider": "cd packages/data-provider && bun run b:build",
+    "b:client": "bun run b:data-provider && cd client && bun run b:build",
+    "b:client:dev": "cd client && bun run b:dev",
+    "b:test:client": "cd client && bun run test",
+    "b:test:api": "cd api && bun run test"
   },
   "repository": {
     "type": "git",

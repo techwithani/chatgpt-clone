@@ -114,12 +114,7 @@ const AuthContextProvider = ({
     });
   };
 
-  const logout = () => {
-    document.cookie.split(';').forEach((c) => {
-      document.cookie = c
-        .replace(/^ +/, '')
-        .replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
-    });
+  const logout = useCallback(() => {
     logoutUser.mutate(undefined, {
       onSuccess: () => {
         posthog.reset();
@@ -134,7 +129,25 @@ const AuthContextProvider = ({
         doSetError((error as Error).message);
       },
     });
-  };
+  }, [setUserContext, logoutUser]);
+
+  const silentRefresh = useCallback(() => {
+    refreshToken.mutate(undefined, {
+      onSuccess: (data: TLoginResponse) => {
+        const { user, token } = data;
+        if (token) {
+          setUserContext({ token, isAuthenticated: true, user });
+        } else {
+          console.log('Token is not present. User is not authenticated.');
+          navigate('/login');
+        }
+      },
+      onError: (error) => {
+        console.log('refreshToken mutation error:', error);
+        navigate('/login');
+      },
+    });
+  }, []);
 
   useEffect(() => {
     if (userQuery.data) {
@@ -147,12 +160,7 @@ const AuthContextProvider = ({
       doSetError(undefined);
     }
     if (!token || !isAuthenticated) {
-      const tokenFromCookie = getCookieValue('token');
-      if (tokenFromCookie) {
-        setUserContext({ token: tokenFromCookie, isAuthenticated: true, user: userQuery.data });
-      } else {
-        navigate('/login', { replace: true });
-      }
+      silentRefresh();
     }
   }, [
     token,
@@ -165,23 +173,23 @@ const AuthContextProvider = ({
     setUserContext,
   ]);
 
-  // const silentRefresh = useCallback(() => {
-  //   refreshToken.mutate(undefined, {
-  //     onSuccess: (data: TLoginResponse) => {
-  //       const { user, token } = data;
-  //       setUserContext({ token, isAuthenticated: true, user });
-  //     },
-  //     onError: error => {
-  //       setError(error.message);
-  //     }
-  //   });
-  //
-  // }, [setUserContext]);
+  useEffect(() => {
+    const handleTokenUpdate = (event) => {
+      console.log('tokenUpdated event received event');
+      const newToken = event.detail;
+      setUserContext({
+        token: newToken,
+        isAuthenticated: true,
+        user: user,
+      });
+    };
 
-  // useEffect(() => {
-  //   if (token)
-  //   silentRefresh();
-  // }, [token, silentRefresh]);
+    window.addEventListener('tokenUpdated', handleTokenUpdate);
+
+    return () => {
+      window.removeEventListener('tokenUpdated', handleTokenUpdate);
+    };
+  }, [setUserContext, user]);
 
   // Make the provider update only when it should
   const memoedValue = useMemo(
