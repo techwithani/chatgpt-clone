@@ -1,7 +1,7 @@
 import {
+  useMemo,
   useState,
   useEffect,
-  useMemo,
   ReactNode,
   useCallback,
   createContext,
@@ -17,34 +17,15 @@ import {
   useRefreshTokenMutation,
   TLoginUser,
 } from 'librechat-data-provider';
+import { TAuthConfig, TUserContext, TAuthContext, TResError } from '~/common';
 import { useNavigate } from 'react-router-dom';
 import { usePostHog } from 'posthog-js/react';
+import useTimeout from './useTimeout';
 
-export type TAuthContext = {
-  user: TUser | undefined;
-  token: string | undefined;
-  isAuthenticated: boolean;
-  error: string | undefined;
-  login: (data: TLoginUser) => void;
-  logout: () => void;
-};
-
-export type TUserContext = {
-  user?: TUser | undefined;
-  token: string | undefined;
-  isAuthenticated: boolean;
-  redirect?: string;
-};
-
-export type TAuthConfig = {
-  loginRedirect: string;
-};
-//@ts-ignore - index expression is not of type number
-window['errorTimeout'] = undefined;
 const AuthContext = createContext<TAuthContext | undefined>(undefined);
 
 const AuthContextProvider = ({
-  authConfig,
+  // authConfig,
   children,
 }: {
   authConfig?: TAuthConfig;
@@ -63,16 +44,7 @@ const AuthContextProvider = ({
   const userQuery = useGetUserQuery({ enabled: !!token });
   const refreshToken = useRefreshTokenMutation();
 
-  // This seems to prevent the error flashing issue
-  const doSetError = (error: string | undefined) => {
-    if (error) {
-      console.log(error);
-      // set timeout to ensure we don't get a flash of the error message
-      window['errorTimeout'] = setTimeout(() => {
-        setError(error);
-      }, 400);
-    }
-  };
+  const doSetError = useTimeout({ callback: (error) => setError(error as string | undefined) });
 
   const setUserContext = useCallback(
     (userContext: TUserContext) => {
@@ -96,19 +68,15 @@ const AuthContextProvider = ({
     [navigate],
   );
 
-  const getCookieValue = (key: string) => {
-    const keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
-    return keyValue ? keyValue[2] : null;
-  };
-
   const login = (data: TLoginUser) => {
     loginUser.mutate(data, {
       onSuccess: (data: TLoginResponse) => {
         const { user, token } = data;
         setUserContext({ token, isAuthenticated: true, user, redirect: '/chat/new' });
       },
-      onError: (error) => {
-        doSetError((error as Error).message);
+      onError: (error: TResError | unknown) => {
+        const resError = error as TResError;
+        doSetError(resError.message);
         navigate('/login', { replace: true });
       },
     });
@@ -127,6 +95,12 @@ const AuthContextProvider = ({
       },
       onError: (error) => {
         doSetError((error as Error).message);
+        setUserContext({
+          token: undefined,
+          isAuthenticated: false,
+          user: undefined,
+          redirect: '/login',
+        });
       },
     });
   }, [setUserContext, logoutUser]);
