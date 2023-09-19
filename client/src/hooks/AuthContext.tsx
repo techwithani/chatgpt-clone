@@ -103,7 +103,7 @@ const AuthContextProvider = ({
         });
       },
     });
-  }, [setUserContext, logoutUser]);
+  }, [setUserContext, doSetError, logoutUser]);
 
   const silentRefresh = useCallback(() => {
     refreshToken.mutate(undefined, {

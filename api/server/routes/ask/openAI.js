@@ -77,6 +77,7 @@ router.post('/', validateEndpoint, buildEndpointOption, setHeaders, async (req, 
           unfinished: true,
           cancelled: false,
           error: false,
+          user,
         });
       }
 
@@ -128,12 +129,12 @@ router.post('/', validateEndpoint, buildEndpointOption, setHeaders, async (req, 
     logtail.log(`AI responds to ${req.user.name}: ` + response.text, ip);
 
     logtail.flush();
-    await saveMessage(response);
+    await saveMessage({ ...response, user });
 
     sendMessage(res, {
-      title: await getConvoTitle(req.user.id, conversationId),
+      title: await getConvoTitle(user, conversationId),
       final: true,
-      conversation: await getConvo(req.user.id, conversationId),
+      conversation: await getConvo(user, conversationId),
       requestMessage: userMessage,
       responseMessage: response,
     });

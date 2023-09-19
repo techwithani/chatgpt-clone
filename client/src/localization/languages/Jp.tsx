@@ -251,5 +251,4 @@ export default {
   com_nav_search_placeholder: 'メッセージ検索',
   com_nav_setting_general: '一般',
   com_nav_setting_data: 'データ管理',
-  com_nav_language: '言語',
 };

@@ -1,3 +1,5 @@
+// Swedish phrases
+
 export default {
   com_ui_examples: 'Exempel', // Examples
   com_ui_new_chat: 'Ny chatt', // New chat
