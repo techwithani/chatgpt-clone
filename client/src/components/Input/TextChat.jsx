@@ -127,7 +127,7 @@ export default function TextChat({ isSearchView = false }) {
   return (
     <>
       <div
-        className="no-gradient-sm fixed bottom-0 left-0 w-full pt-6 sm:bg-gradient-to-b md:absolute"
+        className="no-gradient-sm fixed bottom-0 left-0 w-full pt-6 sm:bg-gradient-to-b md:absolute md:w-[calc(100%-.5rem)]"
         style={{
           background: `linear-gradient(to bottom, 
                 ${isDark ? 'rgba(10, 59, 92, 0)' : 'rgba(255, 255, 255, 0)'}, 
