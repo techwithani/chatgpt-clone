@@ -124,7 +124,9 @@ Keep up with the latest updates by visiting the releases page - [Releases](https
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=techwithanirudh/chatgpt-clone&type=Date)](https://star-history.com/#techwithanirudh/chatgpt-clone&Date)
+<a href="https://star-history.com/#techwithanirudh/chatgpt-clone&Date">
+  <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=techwithanirudh/chatgpt-clone&type=Date&theme=dark" onerror="this.src='https://api.star-history.com/svg?repos=techwithanirudh/chatgpt-clone&type=Date'" />
+</a>
 
 ---
 
