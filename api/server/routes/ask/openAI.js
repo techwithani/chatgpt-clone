@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { Logtail } = require('@logtail/node');
-const { getResponseSender } = require('../endpoints/schemas');
-const { sendMessage, createOnProgress } = require('../../utils');
-const { addTitle, initializeClient } = require('../endpoints/openAI');
-const { saveMessage, getConvoTitle, getConvo } = require('../../../models');
+const { sendMessage, createOnProgress } = require('~/server/utils');
+const { saveMessage, getConvoTitle, getConvo } = require('~/models');
+const { getResponseSender } = require('~/server/routes/endpoints/schemas');
+const { addTitle, initializeClient } = require('~/server/routes/endpoints/openAI');
 const {
   handleAbort,
   createAbortController,
@@ -12,7 +12,7 @@ const {
   setHeaders,
   validateEndpoint,
   buildEndpointOption,
-} = require('../../middleware');
+} = require('~/server/middleware');
 
 var logtail;
 try {
@@ -109,8 +109,7 @@ router.post('/', validateEndpoint, buildEndpointOption, setHeaders, async (req, 
 
   try {
     const { client } = await initializeClient({ req, res, endpointOption });
-
-    let response = await client.sendMessage(text, {
+    const messageOptions = {
       user,
       parentMessageId,
       conversationId,
@@ -124,7 +123,9 @@ router.post('/', validateEndpoint, buildEndpointOption, setHeaders, async (req, 
         text,
         parentMessageId: overrideParentMessageId || userMessageId,
       }),
-    });
+    };
+
+    let response = await client.sendMessage(text, messageOptions);
 
     if (overrideParentMessageId) {
       response.parentMessageId = overrideParentMessageId;
@@ -134,11 +135,15 @@ router.post('/', validateEndpoint, buildEndpointOption, setHeaders, async (req, 
       response = { ...response, ...metadata };
     }
 
+    if (client.options.attachments) {
+      userMessage.files = client.options.attachments;
+      delete userMessage.image_urls;
+    }
+
     console.log(`AI responds to ${req.user.name}: `, response.text);
     logtail.log(`AI responds to ${req.user.name}: ` + response.text, ip);
 
     logtail.flush();
-    await saveMessage({ ...response, user });
 
     sendMessage(res, {
       title: await getConvoTitle(user, conversationId),
@@ -148,6 +153,9 @@ router.post('/', validateEndpoint, buildEndpointOption, setHeaders, async (req, 
       responseMessage: response,
     });
     res.end();
+
+    await saveMessage({ ...response, user });
+    await saveMessage(userMessage);
 
     if (parentMessageId === '00000000-0000-0000-0000-000000000000' && newConvo) {
       addTitle(req, {

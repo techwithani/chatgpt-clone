@@ -1,15 +1,19 @@
-const { encoding_for_model: encodingForModel, get_encoding: getEncoding } = require('tiktoken');
+const OpenAI = require('openai');
 const { HttpsProxyAgent } = require('https-proxy-agent');
-const ChatGPTClient = require('./ChatGPTClient');
-const BaseClient = require('./BaseClient');
-const { getModelMaxTokens, genAzureChatCompletion } = require('../../utils');
+const { encoding_for_model: encodingForModel, get_encoding: getEncoding } = require('tiktoken');
+const { encodeAndFormat, validateVisionModel } = require('~/server/services/Files/images');
+const { getModelMaxTokens, genAzureChatCompletion, extractBaseURL } = require('~/utils');
 const { truncateText, formatMessage, CUT_OFF_PROMPT } = require('./prompts');
-const spendTokens = require('../../models/spendTokens');
-const { isEnabled } = require('../../server/utils');
+const { getResponseSender, EModelEndpoint } = require('~/server/routes/endpoints/schemas');
+const { handleOpenAIErrors } = require('./tools/util');
+const spendTokens = require('~/models/spendTokens');
 const { createLLM, RunManager } = require('./llm');
+const { isEnabled } = require('~/server/utils');
+const ChatGPTClient = require('./ChatGPTClient');
 const { summaryBuffer } = require('./memory');
 const { runTitleChain } = require('./chains');
 const { tokenSplit } = require('./document');
+const BaseClient = require('./BaseClient');
 
 // Cache to store Tiktoken instances
 const tokenizersCache = {};
@@ -22,18 +26,15 @@ class OpenAIClient extends BaseClient {
     this.ChatGPTClient = new ChatGPTClient();
     this.buildPrompt = this.ChatGPTClient.buildPrompt.bind(this);
     this.getCompletion = this.ChatGPTClient.getCompletion.bind(this);
-    this.sender = options.sender ?? 'ChatGPT';
     this.contextStrategy = options.contextStrategy
       ? options.contextStrategy.toLowerCase()
       : 'discard';
     this.shouldSummarize = this.contextStrategy === 'summarize';
     this.azure = options.azure || false;
-    if (this.azure) {
-      this.azureEndpoint = genAzureChatCompletion(this.azure);
-    }
     this.setOptions(options);
   }
 
+  // TODO: PluginsClient calls this 3x, unneeded
   setOptions(options) {
     if (this.options && !this.options.replaceOptions) {
       this.options.modelOptions = {
@@ -54,6 +55,7 @@ class OpenAIClient extends BaseClient {
     }
 
     const modelOptions = this.options.modelOptions || {};
+
     if (!this.modelOptions) {
       this.modelOptions = {
         ...modelOptions,
@@ -73,8 +75,16 @@ class OpenAIClient extends BaseClient {
       };
     }
 
+    if (this.options.attachments && !validateVisionModel(this.modelOptions.model)) {
+      this.modelOptions.model = 'gpt-4-vision-preview';
+    }
+
+    if (validateVisionModel(this.modelOptions.model)) {
+      delete this.modelOptions.stop;
+    }
+
     const { OPENROUTER_API_KEY, OPENAI_FORCE_PROMPT } = process.env ?? {};
-    if (OPENROUTER_API_KEY) {
+    if (OPENROUTER_API_KEY && !this.azure) {
       this.apiKey = OPENROUTER_API_KEY;
       this.useOpenRouter = true;
     }
@@ -84,11 +94,22 @@ class OpenAIClient extends BaseClient {
       isEnabled(OPENAI_FORCE_PROMPT) ||
       (reverseProxy && reverseProxy.includes('completions') && !reverseProxy.includes('chat'));
 
+    if (this.azure && process.env.AZURE_OPENAI_DEFAULT_MODEL) {
+      this.azureEndpoint = genAzureChatCompletion(this.azure, this.modelOptions.model);
+      this.modelOptions.model = process.env.AZURE_OPENAI_DEFAULT_MODEL;
+    } else if (this.azure) {
+      this.azureEndpoint = genAzureChatCompletion(this.azure, this.modelOptions.model);
+    }
+
     const { model } = this.modelOptions;
 
     this.isChatCompletion = this.useOpenRouter || !!reverseProxy || model.includes('gpt-');
     this.isChatGptModel = this.isChatCompletion;
-    if (model.includes('text-davinci-003') || model.includes('instruct') || this.FORCE_PROMPT) {
+    if (
+      model.includes('text-davinci') ||
+      model.includes('gpt-3.5-turbo-instruct') ||
+      this.FORCE_PROMPT
+    ) {
       this.isChatCompletion = false;
       this.isChatGptModel = false;
     }
@@ -117,12 +138,20 @@ class OpenAIClient extends BaseClient {
       );
     }
 
+    this.sender =
+      this.options.sender ??
+      getResponseSender({
+        model: this.modelOptions.model,
+        endpoint: EModelEndpoint.openAI,
+        chatGptLabel: this.options.chatGptLabel,
+      });
+
     this.userLabel = this.options.userLabel || 'User';
     this.chatGptLabel = this.options.chatGptLabel || 'Assistant';
 
     this.setupTokens();
 
-    if (!this.modelOptions.stop) {
+    if (!this.modelOptions.stop && !validateVisionModel(this.modelOptions.model)) {
       const stopTokens = [this.startToken];
       if (this.endToken && this.endToken !== this.startToken) {
         stopTokens.push(this.endToken);
@@ -134,11 +163,7 @@ class OpenAIClient extends BaseClient {
 
     if (reverseProxy) {
       this.completionsUrl = reverseProxy;
-      this.langchainProxy = reverseProxy.match(/.*v1/)?.[0];
-      !this.langchainProxy &&
-        console.warn(`The reverse proxy URL ${reverseProxy} is not valid for Plugins.
-The url must follow OpenAI specs, for example: https://localhost:8080/v1/chat/completions
-If your reverse proxy is compatible to OpenAI specs in every other way, it may still work without plugins enabled.`);
+      this.langchainProxy = extractBaseURL(reverseProxy);
     } else if (isChatGptModel) {
       this.completionsUrl = 'https://api.openai.com/v1/chat/completions';
     } else {
@@ -278,6 +303,7 @@ If your reverse proxy is compatible to OpenAI specs in every other way, it may s
     messages,
     parentMessageId,
     { isChatCompletion = false, promptPrefix = null },
+    opts,
   ) {
     let orderedMessages = this.constructor.getMessagesForConversation({
       messages,
@@ -308,6 +334,17 @@ If your reverse proxy is compatible to OpenAI specs in every other way, it may s
       if (this.contextStrategy) {
         instructions.tokenCount = this.getTokenCountForMessage(instructions);
       }
+    }
+
+    if (this.options.attachments) {
+      const attachments = await this.options.attachments;
+      const { files, image_urls } = await encodeAndFormat(
+        this.options.req,
+        attachments.filter((file) => file.type.includes('image')),
+      );
+
+      orderedMessages[orderedMessages.length - 1].image_urls = image_urls;
+      this.options.attachments = files;
     }
 
     const formattedMessages = orderedMessages.map((message, i) => {
@@ -344,8 +381,8 @@ If your reverse proxy is compatible to OpenAI specs in every other way, it may s
       result.tokenCountMap = tokenCountMap;
     }
 
-    if (promptTokens >= 0 && typeof this.options.getReqData === 'function') {
-      this.options.getReqData({ promptTokens });
+    if (promptTokens >= 0 && typeof opts?.getReqData === 'function') {
+      opts.getReqData({ promptTokens });
     }
 
     return result;
@@ -356,7 +393,9 @@ If your reverse proxy is compatible to OpenAI specs in every other way, it may s
     let result = null;
     let streamResult = null;
     this.modelOptions.user = this.user;
-    if (typeof opts.onProgress === 'function') {
+    const invalidBaseUrl = this.completionsUrl && extractBaseURL(this.completionsUrl) === null;
+    const useOldMethod = !!(this.azure || invalidBaseUrl || !this.isChatCompletion);
+    if (typeof opts.onProgress === 'function' && useOldMethod) {
       await this.getCompletion(
         payload,
         (progressMessage) => {
@@ -399,6 +438,13 @@ If your reverse proxy is compatible to OpenAI specs in every other way, it may s
         },
         opts.abortController || new AbortController(),
       );
+    } else if (typeof opts.onProgress === 'function') {
+      reply = await this.chatCompletion({
+        payload,
+        clientOptions: opts,
+        onProgress: opts.onProgress,
+        abortController: opts.abortController,
+      });
     } else {
       result = await this.getCompletion(
         payload,
@@ -517,6 +563,10 @@ If your reverse proxy is compatible to OpenAI specs in every other way, it may s
       console.log('There was an issue generating title with LangChain, trying the old method...');
       this.options.debug && console.error(e.message, e);
       modelOptions.model = OPENAI_TITLE_MODEL ?? 'gpt-3.5-turbo';
+      if (this.azure) {
+        modelOptions.model = process.env.AZURE_OPENAI_DEFAULT_MODEL ?? modelOptions.model;
+        this.azureEndpoint = genAzureChatCompletion(this.azure, modelOptions.model);
+      }
       const instructionsPayload = [
         {
           role: 'system',
@@ -665,6 +715,140 @@ ${convo}
       role: 'assistant',
       content: response.text,
     });
+  }
+
+  async chatCompletion({ payload, onProgress, clientOptions, abortController = null }) {
+    let error = null;
+    const errorCallback = (err) => (error = err);
+    let intermediateReply = '';
+    try {
+      if (!abortController) {
+        abortController = new AbortController();
+      }
+      const modelOptions = { ...this.modelOptions };
+      if (typeof onProgress === 'function') {
+        modelOptions.stream = true;
+      }
+      if (this.isChatCompletion) {
+        modelOptions.messages = payload;
+      } else {
+        // TODO: unreachable code. Need to implement completions call for non-chat models
+        modelOptions.prompt = payload;
+      }
+
+      const { debug } = this.options;
+      const url = extractBaseURL(this.completionsUrl);
+      if (debug) {
+        console.debug('baseURL', url);
+        console.debug('modelOptions', modelOptions);
+      }
+      const opts = {
+        baseURL: url,
+      };
+
+      if (this.useOpenRouter) {
+        opts.defaultHeaders = {
+          'HTTP-Referer': 'https://librechat.ai',
+          'X-Title': 'LibreChat',
+        };
+      }
+
+      if (this.options.headers) {
+        opts.defaultHeaders = { ...opts.defaultHeaders, ...this.options.headers };
+      }
+
+      if (this.options.proxy) {
+        opts.httpAgent = new HttpsProxyAgent(this.options.proxy);
+      }
+
+      if (validateVisionModel(modelOptions.model)) {
+        modelOptions.max_tokens = 4000;
+      }
+
+      let chatCompletion;
+      const openai = new OpenAI({
+        apiKey: this.apiKey,
+        ...opts,
+      });
+
+      if (modelOptions.stream) {
+        const stream = await openai.beta.chat.completions
+          .stream({
+            ...modelOptions,
+            stream: true,
+          })
+          .on('abort', () => {
+            /* Do nothing here */
+          })
+          .on('error', (err) => {
+            handleOpenAIErrors(err, errorCallback, 'stream');
+          });
+
+        for await (const chunk of stream) {
+          const token = chunk.choices[0]?.delta?.content || '';
+          intermediateReply += token;
+          onProgress(token);
+          if (abortController.signal.aborted) {
+            stream.controller.abort();
+            break;
+          }
+        }
+
+        chatCompletion = await stream.finalChatCompletion().catch((err) => {
+          handleOpenAIErrors(err, errorCallback, 'finalChatCompletion');
+        });
+      }
+      // regular completion
+      else {
+        chatCompletion = await openai.chat.completions
+          .create({
+            ...modelOptions,
+          })
+          .catch((err) => {
+            handleOpenAIErrors(err, errorCallback, 'create');
+          });
+      }
+
+      if (!chatCompletion && error) {
+        throw new Error(error);
+      } else if (!chatCompletion) {
+        throw new Error('Chat completion failed');
+      }
+
+      const { message, finish_reason } = chatCompletion.choices[0];
+      if (chatCompletion && typeof clientOptions.addMetadata === 'function') {
+        clientOptions.addMetadata({ finish_reason });
+      }
+
+      return message.content;
+    } catch (err) {
+      if (
+        err?.message?.includes('abort') ||
+        (err instanceof OpenAI.APIError && err?.message?.includes('abort'))
+      ) {
+        return '';
+      }
+      if (
+        err?.message?.includes('missing finish_reason') ||
+        (err instanceof OpenAI.OpenAIError && err?.message?.includes('missing finish_reason'))
+      ) {
+        await abortController.abortCompletion();
+        return intermediateReply;
+      } else if (err instanceof OpenAI.APIError) {
+        console.log(err.name);
+        console.log(err.status);
+        console.log(err.headers);
+        if (intermediateReply) {
+          return intermediateReply;
+        } else {
+          throw err;
+        }
+      } else {
+        console.warn('[OpenAIClient.chatCompletion] Unhandled error type');
+        console.error(err);
+        throw err;
+      }
+    }
   }
 }
 

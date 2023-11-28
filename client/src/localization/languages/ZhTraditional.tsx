@@ -239,6 +239,7 @@ export default {
   com_nav_confirm_clear: '確認清除',
   com_nav_close_sidebar: '關閉側邊選單',
   com_nav_open_sidebar: '開啟側邊選單',
+  com_nav_send_message: '傳送訊息',
   com_nav_log_out: '登出',
   com_nav_user: '使用者',
   com_nav_clear_conversation: '清除對話',

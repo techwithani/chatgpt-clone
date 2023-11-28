@@ -72,7 +72,7 @@ const AuthContextProvider = ({
     loginUser.mutate(data, {
       onSuccess: (data: TLoginResponse) => {
         const { user, token } = data;
-        setUserContext({ token, isAuthenticated: true, user, redirect: '/chat/new' });
+        setUserContext({ token, isAuthenticated: true, user, redirect: '/c/new' });
       },
       onError: (error: TResError | unknown) => {
         const resError = error as TResError;
